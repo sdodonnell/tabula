@@ -1,0 +1,15 @@
+{
+  "name": "tabula",
+  "version": "1.0.0",
+  "description": "A better LMS",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tabula"
+  },
+  "author": "",
+  "license": "ISC"
+}
