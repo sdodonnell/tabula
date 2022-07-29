@@ -6,16 +6,84 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String?  @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id          String                @id @default(uuid())
+  firstName   String
+  lastName    String
+  email       String
+  role        Role
+  enrollments CourseEnrollment[]
+  assignments AssignmentEntry[]
+}
 
-  @@map(name: "users")
+model Course {
+  id          Int             @id @default(autoincrement())
+  name        String
+  active      Boolean            @default(true)
+  enrollments CourseEnrollment[]
+  assignments Assignment[]
+  instances   CourseDuration[]
+}
+
+model CourseEnrollment {
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  courseId Int
+  course   Course @relation(fields: [courseId], references: [id])
+
+  @@id([userId, courseId])
+}
+
+model Assignment {
+  id       String            @id @default(uuid())
+  name     String
+  type     AssignmentType
+  content  Json
+  course   Course            @relation(fields: [courseId], references: [id])
+  courseId Int
+  entries  AssignmentEntry[]
+}
+
+model AssignmentEntry {
+  studentId    String
+  student      User       @relation(fields: [studentId], references: [id])
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  content      Json
+
+  @@id([studentId, assignmentId])
+}
+
+model Duration {
+  id        Int              @id @default(autoincrement())
+  startDate DateTime
+  endDate   DateTime
+  courses   CourseDuration[] @relation(fields: [], references: [])
+}
+
+model CourseDuration {
+  courseId   Int
+  course     Course   @relation(fields: [courseId], references: [id])
+  durationId Int
+  duration   Duration @relation(fields: [durationId], references: [id])
+
+  @@id([courseId, durationId])
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMINISTRATOR
+}
+
+enum AssignmentType {
+  TEST
+  HOMEWORK
+  QUIZ
+  PROJECT
 }
