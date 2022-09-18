@@ -1,9 +1,24 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
+import styled from 'styled-components';
+import MenuBar from '../components/MenuBar';
+
+const ComponentWindow = styled.div`
+  width: 80%;
+  height: 80vh;
+  overflow: scroll;
+  margin: 0 auto;
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <MenuBar />
+      <ComponentWindow>
+        <Component {...pageProps} />
+      </ComponentWindow>
+    </>
+  );
 }
 
 export default MyApp;

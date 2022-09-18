@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 
 
-const Dashboard: NextPage = () => {
+const Profile: NextPage = () => {
   return (
     <>
-      <h2>Dashboard</h2>
+      <h2>Profile</h2>
       <div>
         <h1>Some text</h1>
         <h1>Some text</h1>
@@ -16,4 +16,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default Profile;
