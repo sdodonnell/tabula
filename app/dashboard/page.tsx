@@ -1,7 +1,4 @@
-import type { NextPage } from 'next';
-
-
-const Dashboard: NextPage = () => {
+export default function Dashboard() {
   return (
     <>
       <h2>Dashboard</h2>
@@ -15,5 +12,3 @@ const Dashboard: NextPage = () => {
     </>
   );
 };
-
-export default Dashboard;
