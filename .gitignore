@@ -12,9 +12,6 @@
 /.next/
 /out/
 
-# prisma migrations
-/prisma/migrations
-
 # production
 /build
 
@@ -26,16 +23,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
 # local env files
 .env*.local
-.env
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-
-.nvmrc
+next-env.d.ts

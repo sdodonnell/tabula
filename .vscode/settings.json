@@ -1,4 +1,8 @@
 {
     "editor.formatOnSave": true,
-    "prettier.insertPragma": false
+    "prettier.insertPragma": false,
+    "files.exclude": {
+        "**/node_modules": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

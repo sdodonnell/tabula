@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { User } from '../lib/types';
+import { User } from '../old/lib/types';
 
 interface GridProps {
   items: User[];
