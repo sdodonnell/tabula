@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="w-screen h-screen grid grid-cols-[16rem_auto]">
           <Sidebar />
-          <div className="overflow-scroll">{children}</div>
+          <div className="overflow-scroll p-4">{children}</div>
         </div>
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js" />
       </body>
