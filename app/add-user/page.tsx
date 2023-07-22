@@ -1,6 +1,18 @@
+'use client';
+
 export default function NewUser() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    fetch('http://127.0.0.1:5000/add-user', {
+      method: 'POST',
+      body: formData
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="grid md:grid-cols-2 md:gap-6">
         <div className="mb-6">
           <label
@@ -12,6 +24,7 @@ export default function NewUser() {
           <input
             type="text"
             id="first-name"
+            name="first_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
@@ -26,6 +39,7 @@ export default function NewUser() {
           <input
             type="text"
             id="last-name"
+            name="last_name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
@@ -34,13 +48,14 @@ export default function NewUser() {
       <div className="grid md:grid-cols-2 md:gap-6">
         <div className="relative z-0 w-full mb-6 group">
           <label
-            htmlFor="countries"
+            htmlFor="user-type"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Select Type
           </label>
           <select
-            id="countries"
+            id="user-type"
+            name="type"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option>Student</option>
@@ -49,13 +64,14 @@ export default function NewUser() {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <label
-            htmlFor="countries"
+            htmlFor="pronoun"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Select Pronoun
           </label>
           <select
-            id="countries"
+            id="pronoun"
+            name="pronouns"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option>He/Him</option>
@@ -74,6 +90,7 @@ export default function NewUser() {
         <input
           type="email"
           id="email"
+          name="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="example@school.org"
           required
