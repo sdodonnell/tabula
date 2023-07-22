@@ -1,6 +1,6 @@
 import './styles/globals.css';
-import './styles/overrides.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import Sidebar from './components/Sidebar';
 
@@ -19,14 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="columns">
-          <div className="column is-one-quarter has-background-link-light">
-            <Sidebar />
-          </div>
-          <div className="column p-5">
-            {children}
-          </div>
+        <div className="w-screen h-screen grid grid-cols-[16rem_auto]">
+          <Sidebar />
+          <div className="overflow-scroll">{children}</div>
         </div>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js" />
       </body>
     </html>
   );
