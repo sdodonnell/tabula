@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import Sidebar from './components/Sidebar';
+import NavBar from './components/NavBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,11 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-screen h-screen grid grid-cols-[16rem_auto]">
+        <div className="antialiased bg-gray-50 dark:bg-gray-900">
+          <NavBar />
           <Sidebar />
-          <div className="overflow-scroll p-4">{children}</div>
+          <main className="p-4 md:ml-64 h-auto pt-20">{children}</main>
         </div>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js" />
       </body>
     </html>
   );

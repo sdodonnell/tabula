@@ -4,7 +4,7 @@
 module.exports = {
   content: [
     "./app/**/*.{ts,tsx}",
-    "./public/**/*.html",
+    "./public/**/*.html"
   ],
   plugins: [
     require("flowbite/plugin")
