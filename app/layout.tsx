@@ -1,8 +1,9 @@
-import './styles/globals.css';
-import './styles/overrides.css';
+import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
-import Sidebar from './components/Sidebar';
+import Sidebar from '@/components/Sidebar';
+import NavBar from '@/components/NavBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,14 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="columns">
-          <div className="column is-one-quarter has-background-link-light">
-            <Sidebar />
-          </div>
-          <div className="column p-5">
-            {children}
-          </div>
+        <div className="antialiased bg-gray-50 dark:bg-gray-900">
+          <NavBar />
+          <Sidebar />
+          <main className="p-4 md:ml-64 h-auto pt-20">{children}</main>
         </div>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js" />
       </body>
     </html>
   );
