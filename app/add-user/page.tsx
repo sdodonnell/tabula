@@ -3,7 +3,8 @@
 export default function NewUser() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const target = event.target as HTMLFormElement;
+    const formData = new FormData(target);
 
     fetch('http://127.0.0.1:5000/add-user', {
       method: 'POST',

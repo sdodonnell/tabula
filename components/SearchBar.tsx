@@ -1,7 +1,7 @@
 const SearchBar = () => {
   return (
     <form action="#" method="GET" className="hidden md:block md:pl-2">
-      <label for="topbar-search" className="sr-only">
+      <label htmlFor="topbar-search" className="sr-only">
         Search
       </label>
       <div className="relative md:w-64 md:w-96">
