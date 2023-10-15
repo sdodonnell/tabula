@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "start": "node dist/index.js",
     "studio": "npx prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm build && node dist/index.js",
+    "dev": "ts-node ./src/index.ts",
     "dev:watch": "concurrently \"pnpm build --watch\" \"node --watch dist/index.js\""
   },
   "keywords": [],
@@ -17,12 +17,17 @@
   "devDependencies": {
     "@types/node": "^20.8.6",
     "concurrently": "^8.2.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@prisma/client": "5.4.2"
+    "@graphql-tools/schema": "^10.0.0",
+    "@prisma/client": "5.4.2",
+    "graphql": "^16.8.1",
+    "graphql-yoga": "^4.0.5"
   },
   "prisma": {
-    "seed": "npx ts-node prisma/seed.ts"
+    "seed": "npx ts-node prisma/seed.ts",
+    "schema": "./src/prisma/schema.prisma"
   }
 }
