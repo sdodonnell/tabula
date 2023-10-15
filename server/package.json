@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
+    "studio": "npx prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm build && node dist/index.js",
     "dev:watch": "concurrently \"pnpm build --watch\" \"node --watch dist/index.js\""
@@ -20,5 +21,8 @@
   },
   "dependencies": {
     "@prisma/client": "5.4.2"
+  },
+  "prisma": {
+    "seed": "npx ts-node prisma/seed.ts"
   }
 }

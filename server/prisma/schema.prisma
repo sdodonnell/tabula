@@ -14,7 +14,7 @@ model User {
   id                   Int                  @id @default(autoincrement())
   firstName            String               @db.VarChar(255)
   lastName             String               @db.VarChar(255)
-  pronouns             String               @db.VarChar(255)
+  gender               String?              @db.VarChar(255)
   email                String               @db.VarChar(255)
   role                 Role                 @default(STUDENT)
   sectionsTaught       Section[]
@@ -35,12 +35,12 @@ model Course {
 model Section {
   id          Int                  @id @default(autoincrement())
   active      Boolean
-  teacher     User                 @relation(fields: [teacherId], references: [id])
+  teacher     User?                @relation(fields: [teacherId], references: [id])
   students    SectionsOnStudents[]
   assignments Assignment[]
   course      Course?              @relation(fields: [courseId], references: [id])
   courseId    Int?
-  teacherId   Int
+  teacherId   Int?
 }
 
 model SectionsOnStudents {

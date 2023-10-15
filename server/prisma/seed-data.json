@@ -1,0 +1,318 @@
+{
+  "users": [
+    {
+      "firstName": "Kliment",
+      "lastName": "Chillingsworth",
+      "email": "kchillingsworth0@vimeo.com",
+      "gender": "Male",
+      "role": "TEACHER"
+    },
+    {
+      "firstName": "Lilian",
+      "lastName": "Baptist",
+      "email": "lbaptist1@nyu.edu",
+      "gender": "Genderfluid",
+      "role": "TEACHER"
+    },
+    {
+      "firstName": "Fayth",
+      "lastName": "Whetland",
+      "email": "fwhetland2@ihg.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Field",
+      "lastName": "Fiddyment",
+      "email": "ffiddyment3@nba.com",
+      "gender": "Genderfluid"
+    },
+    {
+      "firstName": "Tymon",
+      "lastName": "Varren",
+      "email": "tvarren4@cargocollective.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Elston",
+      "lastName": "Bothams",
+      "email": "ebothams5@wsj.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Amerigo",
+      "lastName": "Inkpen",
+      "email": "ainkpen6@apache.org",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Nisse",
+      "lastName": "Blurton",
+      "email": "nblurton7@chicagotribune.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Nancie",
+      "lastName": "Debnam",
+      "email": "ndebnam8@icq.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Gisela",
+      "lastName": "Roache",
+      "email": "groache9@angelfire.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Della",
+      "lastName": "Stocker",
+      "email": "dstockera@bizjournals.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Corrie",
+      "lastName": "McLardie",
+      "email": "cmclardieb@cornell.edu",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Domini",
+      "lastName": "Christopher",
+      "email": "dchristopherc@cam.ac.uk",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Arielle",
+      "lastName": "Sidworth",
+      "email": "asidworthd@hugedomains.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Aubine",
+      "lastName": "Drust",
+      "email": "adruste@de.vu",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Candice",
+      "lastName": "Blanpein",
+      "email": "cblanpeinf@mozilla.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Salvidor",
+      "lastName": "Wagstaff",
+      "email": "swagstaffg@usnews.com",
+      "gender": "Genderfluid"
+    },
+    {
+      "firstName": "Sylas",
+      "lastName": "Hulls",
+      "email": "shullsh@cam.ac.uk",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Ramon",
+      "lastName": "Pfeifer",
+      "email": "rpfeiferi@elegantthemes.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Trenna",
+      "lastName": "Poveleye",
+      "email": "tpoveleyej@goo.gl",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Bambie",
+      "lastName": "Blaby",
+      "email": "bblabyk@pinterest.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Dario",
+      "lastName": "Scorey",
+      "email": "dscoreyl@biglobe.ne.jp",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Phylys",
+      "lastName": "Fontes",
+      "email": "pfontesm@jalbum.net",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Al",
+      "lastName": "Santino",
+      "email": "asantinon@mac.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Darrell",
+      "lastName": "Osinin",
+      "email": "dosinino@omniture.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Tadeas",
+      "lastName": "Androck",
+      "email": "tandrockp@live.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Benni",
+      "lastName": "Vaz",
+      "email": "bvazq@yahoo.co.jp",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Billye",
+      "lastName": "Spoerl",
+      "email": "bspoerlr@elegantthemes.com",
+      "gender": "Bigender"
+    },
+    {
+      "firstName": "Radcliffe",
+      "lastName": "Izhaky",
+      "email": "rizhakys@constantcontact.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Shell",
+      "lastName": "Rummins",
+      "email": "srumminst@weibo.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Findley",
+      "lastName": "Apdell",
+      "email": "fapdellu@indiatimes.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Garrot",
+      "lastName": "More",
+      "email": "gmorev@walmart.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Kelly",
+      "lastName": "Perfitt",
+      "email": "kperfittw@tripod.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Khalil",
+      "lastName": "Gosart",
+      "email": "kgosartx@nytimes.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Aurelie",
+      "lastName": "Roony",
+      "email": "aroonyy@cmu.edu",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Leeland",
+      "lastName": "Nield",
+      "email": "lnieldz@yahoo.com",
+      "gender": "Bigender"
+    },
+    {
+      "firstName": "Michaela",
+      "lastName": "Boyes",
+      "email": "mboyes10@omniture.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Goddard",
+      "lastName": "Twitching",
+      "email": "gtwitching11@pen.io",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Conrado",
+      "lastName": "Vogel",
+      "email": "cvogel12@youku.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Farlie",
+      "lastName": "Girogetti",
+      "email": "fgirogetti13@tamu.edu",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Hodge",
+      "lastName": "Rolfe",
+      "email": "hrolfe14@goo.ne.jp",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Hunter",
+      "lastName": "Forten",
+      "email": "hforten15@stanford.edu",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Any",
+      "lastName": "Krink",
+      "email": "akrink16@ebay.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Peggy",
+      "lastName": "Kohlerman",
+      "email": "pkohlerman17@wikispaces.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Salaidh",
+      "lastName": "Brooksbie",
+      "email": "sbrooksbie18@cnn.com",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Charlie",
+      "lastName": "Rickeard",
+      "email": "crickeard19@smugmug.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Broddy",
+      "lastName": "Dewdney",
+      "email": "bdewdney1a@salon.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Ab",
+      "lastName": "Bricket",
+      "email": "abricket1b@skype.com",
+      "gender": "Male"
+    },
+    {
+      "firstName": "Jacklyn",
+      "lastName": "Cohalan",
+      "email": "jcohalan1c@icio.us",
+      "gender": "Female"
+    },
+    {
+      "firstName": "Valdemar",
+      "lastName": "MacAfee",
+      "email": "vmacafee1d@xing.com",
+      "gender": "Bigender"
+    }
+  ],
+  "courses": [{
+    "name": "World History",
+    "term": "Spring 2024",
+    "description": "History of the world.",
+    "sections": {
+        "create": [{
+            "active": true
+        }, {
+            "active": true
+        }]
+    }
+  }]
+}
