@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   Int                  @id @default(autoincrement())
+  firstName            String               @db.VarChar(255)
+  lastName             String               @db.VarChar(255)
+  gender               String?              @db.VarChar(255)
+  email                String               @db.VarChar(255)
+  role                 Role                 @default(STUDENT)
+  sectionsTaught       Section[]
+  sectionsEnrolled     SectionsOnStudents[]
+  createdAssignments   Assignment[]
+  submittedAssignments Submission[]
+}
+
+model Course {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  term        String    @db.VarChar(255)
+  description String    @db.VarChar(255)
+  syllabus    String? // URL
+  sections    Section[]
+}
+
+model Section {
+  id          Int                  @id @default(autoincrement())
+  active      Boolean
+  teacher     User?                @relation(fields: [teacherId], references: [id])
+  students    SectionsOnStudents[]
+  assignments Assignment[]
+  course      Course               @relation(fields: [courseId], references: [id])
+  courseId    Int
+  teacherId   Int?
+}
+
+model SectionsOnStudents {
+  student   User    @relation(fields: [studentId], references: [id])
+  section   Section @relation(fields: [sectionId], references: [id])
+  studentId Int
+  sectionId Int
+
+  @@id([studentId, sectionId])
+}
+
+model Assignment {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String
+  file        String // URL
+  dueDate     DateTime
+  createdDate DateTime
+  createdBy   User         @relation(fields: [userId], references: [id])
+  submissions Submission[]
+  Section     Section?     @relation(fields: [sectionId], references: [id])
+  sectionId   Int?
+  userId      Int
+}
+
+model Submission {
+  id            Int         @id @default(autoincrement())
+  grade         Int
+  submittedDate DateTime
+  feedback      String      @db.Text
+  Assignment    Assignment? @relation(fields: [assignmentId], references: [id])
+  assignmentId  Int?
+  student       User        @relation(fields: [studentId], references: [id])
+  studentId     Int
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+  PARENT
+}
