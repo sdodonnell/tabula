@@ -1,10 +1,10 @@
-type Pronoun = 'he/him' | 'she/her' | 'they/them';
+type Gender = 'Male' | 'Female' | 'Genderfluid';
 
 export type User = {
   firstName: string;
   lastName: string;
   email: string;
-  pronouns: Pronoun;
+  gender: Gender;
 };
 
 export type Student = User & {

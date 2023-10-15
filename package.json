@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@graphql-tools/schema": "^10.0.0",
+    "@prisma/client": "^5.4.2",
     "flowbite": "^1.8.1",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
+    "graphql-yoga": "^4.0.5",
     "next": "13.4.10",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.4.2",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -23,7 +29,11 @@
     "eslint-config-next": "13.4.10",
     "postcss": "^8.4.29",
     "prettier": "^3.0.3",
+    "prisma": "5.4.2",
     "tailwindcss": "^3.3.3",
     "typescript": "5.1.6"
+  },
+  "prisma": {
+    "seed": "npx ts-node prisma/seed.ts"
   }
 }

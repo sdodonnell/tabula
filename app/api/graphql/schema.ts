@@ -91,7 +91,7 @@ const resolvers = {
         lastName: string;
         gender: string;
         email: string;
-        role: Role
+        role: Role;
       },
       context: GraphQLContext
     ) => {
