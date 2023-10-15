@@ -1,3 +1,3 @@
 export default function MyStudents() {
-    return <p>Nothing here yet!</p>
+  return <p>Nothing here yet!</p>;
 }
