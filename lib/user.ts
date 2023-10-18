@@ -1,12 +1,20 @@
 import { request, gql } from 'graphql-request';
 import { User } from '@/types/user';
 import { Role } from '@prisma/client';
+import { GQL_ENDPOINT } from './utils';
 
-const endpoint = 'http://localhost:3000/api/graphql';
+export type UserInputVariables = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  email: string;
+  role: Role;
+};
 
 const allUsersSchema = gql`
   {
     allUsers {
+      id
       firstName
       lastName
       email
@@ -17,7 +25,7 @@ const allUsersSchema = gql`
 `;
 
 const createUserSchema = gql`
-  mutation CreateUser(
+  mutation(
     $firstName: String
     $lastName: String
     $gender: String
@@ -33,8 +41,7 @@ const createUserSchema = gql`
         role: $role
       }
     ) {
-      firstName
-      lastName
+      id
     }
   }
 `;
@@ -48,7 +55,7 @@ export const getUser = async () => {
 export const getUsers = async (): Promise<User[]> => {
   try {
     const res = await request<Record<'allUsers', User[]>>(
-      endpoint,
+      GQL_ENDPOINT,
       allUsersSchema
     );
     return res.allUsers;
@@ -58,16 +65,12 @@ export const getUsers = async (): Promise<User[]> => {
   }
 };
 
-export const createUser = async (variables: {
-  firstName: string;
-  lastName: string;
-  gender: string;
-  email: string;
-  role: Role;
-}): Promise<User | null> => {
+export const createUser = async (
+  variables: UserInputVariables
+): Promise<Partial<User> | null> => {
   try {
     const user = await request<Record<'createUser', User>>(
-      endpoint,
+      GQL_ENDPOINT,
       createUserSchema,
       variables
     );

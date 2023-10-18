@@ -1,10 +1,10 @@
 import { getUsers } from '@/lib/user';
-import { UserParam } from '@/types/user';
-import UserList from '@/components/UserList';
+import { User, UserParam } from '@/types/user';
+import DataList from '@/components/DataList';
 
 export default async function Students() {
   const users = await getUsers();
   const params: UserParam[] = ['firstName', 'lastName', 'email'];
 
-  return <UserList users={users} params={params} />;
+  return <DataList<User> data={users} params={params} />;
 }

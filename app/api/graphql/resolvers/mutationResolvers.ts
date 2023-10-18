@@ -1,18 +1,13 @@
-import { Role } from '@prisma/client';
 import { GraphQLContext } from '../context';
+import { CourseInputVariables } from '@/lib/course';
+import { UserInputVariables } from '@/lib/user';
 
 export const createUserMutationResolver = async (
   parent: unknown,
   {
     data
   }: {
-    data: {
-      firstName: string;
-      lastName: string;
-      gender: string;
-      email: string;
-      role: Role;
-    };
+    data: UserInputVariables;
   },
   context: GraphQLContext
 ) => {
@@ -23,10 +18,16 @@ export const createUserMutationResolver = async (
 
 export const createCourseMutationResolver = async (
   parent: unknown,
-  args: {},
+  {
+    data
+  }: {
+    data: CourseInputVariables;
+  },
   context: GraphQLContext
 ) => {
-  console.log('hello', args);
+  const newCourse = await context.prisma.course.create({ data });
+
+  return newCourse;
 };
 export const createSectionMutationResolver = async (
   parent: unknown,

@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import {
+  allCoursesQueryResolver,
   allUsersQueryResolver,
   userQueryResolver
 } from './resolvers/queryResolvers';
@@ -19,6 +20,7 @@ const queryDefinitions = `
   type Query {
     user(id: ID!): User
     allUsers: [User!]!
+    allCourses: [Course!]!
   }
 `;
 
@@ -127,7 +129,8 @@ const inputDefinitions = `
 const resolvers = {
   Query: {
     user: userQueryResolver,
-    allUsers: allUsersQueryResolver
+    allUsers: allUsersQueryResolver,
+    allCourses: allCoursesQueryResolver
   },
   Mutation: {
     createUser: createUserMutationResolver,

@@ -1,11 +1,14 @@
-import { User, UserParam } from '@/types/user';
+import { Node } from '@/types';
 
-type UserListProps = {
-  users: User[];
-  params: UserParam[];
+type DataListProps<T> = {
+  data: T[];
+  params: Array<string & keyof T>;
 };
 
-export default function UserList({ users, params }: UserListProps) {
+export default function DataList<T extends Node>({
+  data,
+  params
+}: DataListProps<T>) {
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -18,14 +21,14 @@ export default function UserList({ users, params }: UserListProps) {
         </tr>
       </thead>
       <tbody>
-        {users.map(user => (
+        {data.map(node => (
           <tr
-            key={`${user.firstName}_${user.lastName}`}
+            key={node.id}
             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
           >
             {params.map(param => (
-              <td key={`${user.firstName}_${param}`} className="px-6 py-4">
-                {user[param]}
+              <td key={`${node.id}_${param}`} className="px-6 py-4">
+                {node[param]}
               </td>
             ))}
           </tr>

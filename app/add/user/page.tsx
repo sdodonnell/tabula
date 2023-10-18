@@ -1,14 +1,22 @@
 'use client';
 
-import { createUser } from '@/lib/user';
+import { UserInputVariables, createUser } from '@/lib/user';
+import { useRouter } from 'next/navigation';
 
 export default function NewUser() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
+    const dataObject = Object.fromEntries(
+      formData.entries()
+    ) as UserInputVariables;
 
-    createUser(Object.fromEntries(formData.entries()));
+    const userId = await createUser(dataObject);
+    console.log("Just created user: ", userId);
+    router.push("/students")
   };
 
   return (
