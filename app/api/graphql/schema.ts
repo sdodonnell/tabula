@@ -26,9 +26,9 @@ const mutationDefinitions = `
   type Mutation {
     createUser(data: UserCreateInput!): User!
     createCourse(data: CourseCreateInput!): Course!
-    createSection(courseId: ID!, teacherId: ID!, active: Boolean)
-    createAssignment(data: AssignmentCreateInput, createdByUserId: ID!, courseId: ID!)
-    createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!)
+    createSection(courseId: ID!, teacherId: ID!, active: Boolean): Section!
+    createAssignment(data: AssignmentCreateInput, createdByUserId: ID!, courseId: ID!): Assignment!
+    createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!): Submission!
   }
 `;
 
@@ -93,8 +93,8 @@ const typeDefinitions = `
     }
 `;
 
-const typeCreateInputDefinitions = `
-  type UserCreateInput {
+const inputDefinitions = `
+  input UserCreateInput {
     firstName: String, 
     lastName: String, 
     gender: String, 
@@ -102,14 +102,14 @@ const typeCreateInputDefinitions = `
     role: Role
   }
 
-  type CourseCreateInput {
+  input CourseCreateInput {
     name: String!,
     term: String!, 
     description: String,
     syllabusUrl: String
   }
 
-  type AssignmentCreateInput {
+  input AssignmentCreateInput {
     name: String,
     description: String,
     filePath: String,
@@ -117,7 +117,7 @@ const typeCreateInputDefinitions = `
     createdDate: Date
   }
 
-  type SubmissionCreateInput {
+  input SubmissionCreateInput {
     grade: Int,
     submittedDate: Date,
     feedback: String
@@ -150,6 +150,6 @@ export const schema = makeExecutableSchema({
     queryDefinitions,
     mutationDefinitions,
     typeDefinitions,
-    typeCreateInputDefinitions
+    inputDefinitions
   ]
 });

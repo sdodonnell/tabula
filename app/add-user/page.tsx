@@ -1,15 +1,14 @@
 'use client';
 
+import { createUser } from '@/lib/user';
+
 export default function NewUser() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
 
-    fetch('http://127.0.0.1:5000/add-user', {
-      method: 'POST',
-      body: formData
-    });
+    createUser(Object.fromEntries(formData.entries()));
   };
 
   return (
@@ -25,7 +24,7 @@ export default function NewUser() {
           <input
             type="text"
             id="first-name"
-            name="first_name"
+            name="firstName"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
@@ -40,7 +39,7 @@ export default function NewUser() {
           <input
             type="text"
             id="last-name"
-            name="last_name"
+            name="lastName"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
@@ -56,11 +55,11 @@ export default function NewUser() {
           </label>
           <select
             id="user-type"
-            name="type"
+            name="role"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <option>Student</option>
-            <option>Teacher</option>
+            <option value="STUDENT">Student</option>
+            <option value="TEACHER">Teacher</option>
           </select>
         </div>
         <div className="relative z-0 w-full mb-6 group">
@@ -72,7 +71,7 @@ export default function NewUser() {
           </label>
           <select
             id="pronoun"
-            name="pronouns"
+            name="gender"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option>He/Him</option>

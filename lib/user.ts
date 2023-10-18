@@ -18,7 +18,7 @@ const allUsersSchema = gql`
 
 const createUserSchema = gql`
   mutation CreateUser(
-    $irstName: String
+    $firstName: String
     $lastName: String
     $gender: String
     $email: String
@@ -72,7 +72,6 @@ export const createUser = async (variables: {
       variables
     );
 
-    console.log(user);
     return user.createUser;
   } catch (error) {
     console.log('Could not create user: ', error);

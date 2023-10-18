@@ -3,18 +3,20 @@ import { GraphQLContext } from '../context';
 
 export const createUserMutationResolver = async (
   parent: unknown,
-  args: {
-    firstName: string;
-    lastName: string;
-    gender: string;
-    email: string;
-    role: Role;
+  {
+    data
+  }: {
+    data: {
+      firstName: string;
+      lastName: string;
+      gender: string;
+      email: string;
+      role: Role;
+    };
   },
   context: GraphQLContext
 ) => {
-  const newUser = await context.prisma.user.create({
-    data: { ...args }
-  });
+  const newUser = await context.prisma.user.create({ data });
 
   return newUser;
 };
