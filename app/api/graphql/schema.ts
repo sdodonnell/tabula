@@ -1,17 +1,38 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { GraphQLContext } from './context';
-import { Role, Section, User } from '@prisma/client';
+import {
+  allUsersQueryResolver,
+  userQueryResolver
+} from './resolvers/queryResolvers';
+import {
+  createAssignmentMutationResolver,
+  createCourseMutationResolver,
+  createSectionMutationResolver,
+  createSubmissionMutationResolver,
+  createUserMutationResolver
+} from './resolvers/mutationResolvers';
+import {
+  sectionCourseResolver,
+  userSectionsResolver
+} from './resolvers/typeResolvers';
+
+const queryDefinitions = `
+  type Query {
+    user(id: ID!): User
+    allUsers: [User!]!
+  }
+`;
+
+const mutationDefinitions = `
+  type Mutation {
+    createUser(data: UserCreateInput!): User!
+    createCourse(data: CourseCreateInput!): Course!
+    createSection(courseId: ID!, teacherId: ID!, active: Boolean)
+    createAssignment(data: AssignmentCreateInput, createdByUserId: ID!, courseId: ID!)
+    createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!)
+  }
+`;
 
 const typeDefinitions = `
-    type Query {
-      user(id: ID!): User
-      allUsers: [User!]!
-    }
-
-    type Mutation {
-      addUser(firstName: String, lastName: String, gender: String, email: String, role: Role): User!
-    }
-
     type User {
       id: ID!
       firstName: String!
@@ -49,7 +70,7 @@ const typeDefinitions = `
       createdDate: Date
       createdBy: User
       submissions: [Submission!]!
-      section: Section
+      course: Course
     }
 
     type Submission {
@@ -72,67 +93,63 @@ const typeDefinitions = `
     }
 `;
 
+const typeCreateInputDefinitions = `
+  type UserCreateInput {
+    firstName: String, 
+    lastName: String, 
+    gender: String, 
+    email: String, 
+    role: Role
+  }
+
+  type CourseCreateInput {
+    name: String!,
+    term: String!, 
+    description: String,
+    syllabusUrl: String
+  }
+
+  type AssignmentCreateInput {
+    name: String,
+    description: String,
+    filePath: String,
+    dueDate: Date,
+    createdDate: Date
+  }
+
+  type SubmissionCreateInput {
+    grade: Int,
+    submittedDate: Date,
+    feedback: String
+  }
+`;
+
 const resolvers = {
   Query: {
-    user: (parent: unknown, args: { id: string }, context: GraphQLContext) =>
-      context.prisma.user.findUnique({
-        where: {
-          id: parseInt(args.id)
-        }
-      }),
-    allUsers: (parent: unknown, args: {}, context: GraphQLContext) =>
-      context.prisma.user.findMany()
+    user: userQueryResolver,
+    allUsers: allUsersQueryResolver
   },
   Mutation: {
-    addUser: async (
-      parent: unknown,
-      args: {
-        firstName: string;
-        lastName: string;
-        gender: string;
-        email: string;
-        role: Role;
-      },
-      context: GraphQLContext
-    ) => {
-      const newUser = await context.prisma.user.create({
-        data: { ...args }
-      });
-
-      return newUser;
-    }
+    createUser: createUserMutationResolver,
+    createCourse: createCourseMutationResolver,
+    createSection: createSectionMutationResolver,
+    createAssignment: createAssignmentMutationResolver,
+    createSubmission: createSubmissionMutationResolver
   },
   User: {
-    sections: (parent: User, args: {}, context: GraphQLContext) => {
-      return parent.role === 'TEACHER'
-        ? context.prisma.section.findMany({
-            where: {
-              teacherId: parent.id
-            }
-          })
-        : context.prisma.section.findMany({
-            where: {
-              students: {
-                some: {
-                  studentId: parent.id
-                }
-              }
-            }
-          });
-    }
+    sections: userSectionsResolver
   },
   Section: {
-    course: (parent: Section, args: {}, context: GraphQLContext) => {
-      context.prisma.course.findUnique({
-        where: {
-          id: parent.courseId
-        }
-      });
-    }
+    course: sectionCourseResolver
   }
 };
 
 export const schema = makeExecutableSchema({
   resolvers: [resolvers],
-  typeDefs: [typeDefinitions]
+  typeDefs: [
+    queryDefinitions,
+    mutationDefinitions,
+    typeDefinitions,
+    typeCreateInputDefinitions
+  ]
 });

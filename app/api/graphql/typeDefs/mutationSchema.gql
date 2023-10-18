@@ -1,0 +1,32 @@
+type Mutation {
+  createUser(
+    firstName: String
+    lastName: String
+    gender: String
+    email: String
+    role: Role
+  ): User!
+  createCourse(
+    name: String!
+    term: String!
+    description: String
+    syllabusUrl: String
+  ): Course!
+  createSection(course: Course!, active: Boolean!, teacher: User): Section!
+  createAssignment(
+    name: String
+    description: String
+    filePath: String
+    dueDate: Date
+    createdDate: Date
+    createdBy: User
+    section: Section
+  ): Assignment!
+  createSubmission(
+    assignment: Assignment!
+    student: User!
+    grade: Int
+    submittedDate: Date
+    feedback: String
+  ): Submission!
+}
