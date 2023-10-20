@@ -11,6 +11,19 @@ export type UserInputVariables = {
   role: Role;
 };
 
+const userSchema = gql`
+  query ($id: ID!) {
+    user(id: $id) {
+      id
+      firstName
+      lastName
+      email
+      role
+      gender
+    }
+  }
+`;
+
 const allUsersSchema = gql`
   {
     allUsers {
@@ -25,7 +38,7 @@ const allUsersSchema = gql`
 `;
 
 const createUserSchema = gql`
-  mutation(
+  mutation (
     $firstName: String
     $lastName: String
     $gender: String
@@ -46,10 +59,18 @@ const createUserSchema = gql`
   }
 `;
 
-export const getUser = async () => {
-  return {
-    firstName: 'Hello'
-  };
+export const getUser = async (variables: { id: number }) => {
+  try {
+    const res = await request<Record<'user', User>>(
+      GQL_ENDPOINT,
+      userSchema,
+      variables
+    );
+    return res.user;
+  } catch (error) {
+    console.log('Could not fetch user data: ', error);
+    return null;
+  }
 };
 
 export const getUsers = async (): Promise<User[]> => {
@@ -81,3 +102,5 @@ export const createUser = async (
     return null;
   }
 };
+
+export const updateUser = () => {};

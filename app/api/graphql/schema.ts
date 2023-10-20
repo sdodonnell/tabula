@@ -29,7 +29,7 @@ const mutationDefinitions = `
     createUser(data: UserCreateInput!): User!
     createCourse(data: CourseCreateInput!): Course!
     createSection(courseId: ID!, teacherId: ID!, active: Boolean): Section!
-    createAssignment(data: AssignmentCreateInput, createdByUserId: ID!, courseId: ID!): Assignment!
+    createAssignment(data: AssignmentCreateInput, createdByUserId: ID, courseId: ID): Assignment!
     createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!): Submission!
   }
 `;

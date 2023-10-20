@@ -1,23 +1,24 @@
 'use client';
 
-import { AssignmentInputVariables, updateAssignment } from '@/lib/assignment';
-import { Form, Formik } from 'formik';
+import { UserInputVariables, updateUser } from '@/lib/user';
+import { Field, Form, Formik } from 'formik';
 import { redirect } from 'next/navigation';
 
 export default function NewUser() {
-  const initialValues: AssignmentInputVariables = {
-    name: '',
-    createdDate: new Date(),
-    createdById: '',
-    courseId: ''
+  const initialValues: UserInputVariables = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    gender: '',
+    role: 'STUDENT'
   };
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={async values => {
-        updateAssignment();
-        redirect('/assignments');
+        await updateUser();
+        redirect('/students');
       }}
     >
       <Form>
@@ -29,7 +30,7 @@ export default function NewUser() {
             >
               First Name
             </label>
-            <input
+            <Field
               type="text"
               id="first-name"
               name="firstName"
@@ -44,7 +45,7 @@ export default function NewUser() {
             >
               Last Name
             </label>
-            <input
+            <Field
               type="text"
               id="last-name"
               name="lastName"
@@ -61,14 +62,15 @@ export default function NewUser() {
             >
               Select Type
             </label>
-            <select
+            <Field
               id="user-type"
               name="role"
+              as="select"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option value="STUDENT">Student</option>
               <option value="TEACHER">Teacher</option>
-            </select>
+            </Field>
           </div>
           <div className="relative z-0 w-full mb-6 group">
             <label
@@ -77,15 +79,16 @@ export default function NewUser() {
             >
               Select Pronoun
             </label>
-            <select
+            <Field
               id="pronoun"
               name="gender"
+              as="select"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option>He/Him</option>
               <option>She/Her</option>
               <option>They/Them</option>
-            </select>
+            </Field>
           </div>
         </div>
         <div className="mb-6">
@@ -95,7 +98,7 @@ export default function NewUser() {
           >
             Email
           </label>
-          <input
+          <Field
             type="email"
             id="email"
             name="email"

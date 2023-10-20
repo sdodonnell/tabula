@@ -58,3 +58,5 @@ export const createCourse = async (
     return null;
   }
 };
+
+export const updateCourse = () => {}

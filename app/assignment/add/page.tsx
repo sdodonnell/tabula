@@ -1,6 +1,6 @@
 'use client';
 
-import { AssignmentInputVariables, updateAssignment } from '@/lib/assignment';
+import { AssignmentInputVariables, createAssignment } from '@/lib/assignment';
 import { Form, Formik } from 'formik';
 import { redirect } from 'next/navigation';
 
@@ -16,7 +16,7 @@ export default function NewUser() {
     <Formik
       initialValues={initialValues}
       onSubmit={async values => {
-        updateAssignment();
+        createAssignment(values);
         redirect('/assignments');
       }}
     >

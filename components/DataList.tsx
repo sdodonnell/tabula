@@ -1,4 +1,5 @@
 import { Node } from '@/types';
+import Link from 'next/link';
 
 type DataListProps<T> = {
   data: T[];
@@ -28,9 +29,14 @@ export default function DataList<T extends Node>({
           >
             {params.map(param => (
               <td key={`${node.id}_${param}`} className="px-6 py-4">
-                {node[param]}
+                <Link href={`/user/${node.id}`}>{node[param]}</Link>
               </td>
             ))}
+            <td>
+              <Link href={`/user/${node.id}/edit`}>Edit</Link>
+              {' | '}
+              <Link href={`/user/${node.id}/delete`}>Delete</Link>
+            </td>
           </tr>
         ))}
       </tbody>
