@@ -60,7 +60,7 @@ const NavBar = () => (
       <div className="flex items-center lg:order-2">
         <button
           id="dropdownDefaultButton"
-          data-dropdown-toggle="dropdown"
+          data-dropdown-toggle="add-dropdown"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button"
         >
@@ -83,7 +83,7 @@ const NavBar = () => (
         </button>
 
         <div
-          id="dropdown"
+          id="add-dropdown"
           className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
         >
           <ul
@@ -179,7 +179,7 @@ const NavBar = () => (
           className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
           id="user-menu-button"
           aria-expanded="false"
-          data-dropdown-toggle="dropdown"
+          data-dropdown-toggle="user-menu-dropdown"
         >
           <span className="sr-only">Open user menu</span>
           <img
@@ -190,7 +190,7 @@ const NavBar = () => (
         </button>
         <div
           className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-          id="dropdown"
+          id="user-menu-dropdown"
         >
           <div className="py-3 px-4">
             <span className="block text-sm font-semibold text-gray-900 dark:text-white">

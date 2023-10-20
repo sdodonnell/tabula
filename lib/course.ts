@@ -5,8 +5,8 @@ import { GQL_ENDPOINT } from './utils';
 export type CourseInputVariables = {
   name: string;
   term: string;
-  description: string;
-  syllabusUrl: string;
+  description?: string;
+  syllabusUrl?: string;
 };
 
 const allCoursesSchema = gql`
