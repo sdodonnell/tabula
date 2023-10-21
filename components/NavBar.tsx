@@ -2,7 +2,6 @@ import React from 'react';
 import Notifications from './Notifications';
 import SearchBar from './SearchBar';
 import AppDropdown from './AppDropdown';
-import AddModal from './AddModal';
 
 const NavBar = () => (
   <nav className="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
@@ -58,7 +57,7 @@ const NavBar = () => (
           >
             <li>
               <a
-                href="/add/user"
+                href="/user/add"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 User
@@ -66,7 +65,7 @@ const NavBar = () => (
             </li>
             <li>
               <a
-                href="/add/course"
+                href="/course/add"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 Course
@@ -74,7 +73,7 @@ const NavBar = () => (
             </li>
             <li>
               <a
-                href="/add/assignment"
+                href="/assignment/add"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 Assignment

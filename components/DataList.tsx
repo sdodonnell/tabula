@@ -1,5 +1,7 @@
 import { Node } from '@/types';
 import Link from 'next/link';
+import ListActions from './ListActions';
+import { deleteUser } from '@/lib/user';
 
 type DataListProps<T> = {
   data: T[];
@@ -33,9 +35,7 @@ export default function DataList<T extends Node>({
               </td>
             ))}
             <td>
-              <Link href={`/user/${node.id}/edit`}>Edit</Link>
-              {' | '}
-              <Link href={`/user/${node.id}/delete`}>Delete</Link>
+              <ListActions id={node.id} deleteUser={deleteUser} />
             </td>
           </tr>
         ))}

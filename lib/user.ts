@@ -2,6 +2,12 @@ import { request, gql } from 'graphql-request';
 import { User } from '@/types/user';
 import { Role } from '@prisma/client';
 import { GQL_ENDPOINT } from './utils';
+import { revalidatePath } from 'next/cache';
+
+export enum USER_ROLES {
+  STUDENT = 'STUDENT',
+  TEACHER = 'TEACHER'
+}
 
 export type UserInputVariables = {
   firstName: string;
@@ -25,8 +31,8 @@ const userSchema = gql`
 `;
 
 const allUsersSchema = gql`
-  {
-    allUsers {
+  query ($role: Role!) {
+    allUsers(role: $role) {
       id
       firstName
       lastName
@@ -59,6 +65,12 @@ const createUserSchema = gql`
   }
 `;
 
+const deleteUserSchema = gql`
+  mutation ($id: ID!) {
+    deleteUser(id: $id)
+  }
+`;
+
 export const getUser = async (variables: { id: number }) => {
   try {
     const res = await request<Record<'user', User>>(
@@ -73,11 +85,12 @@ export const getUser = async (variables: { id: number }) => {
   }
 };
 
-export const getUsers = async (): Promise<User[]> => {
+export const getUsers = async (variables: { role: Role }): Promise<User[]> => {
   try {
     const res = await request<Record<'allUsers', User[]>>(
       GQL_ENDPOINT,
-      allUsersSchema
+      allUsersSchema,
+      variables
     );
     return res.allUsers;
   } catch (error) {
@@ -104,3 +117,22 @@ export const createUser = async (
 };
 
 export const updateUser = () => {};
+
+export const deleteUser = async (variables: { id: number }, path: string) => {
+  'use server';
+
+  try {
+    const user = await request<Record<'deleteUser', User>>(
+      GQL_ENDPOINT,
+      deleteUserSchema,
+      variables
+    );
+
+    revalidatePath(path);
+
+    return user.deleteUser;
+  } catch (error) {
+    console.log('Could not delete user: ', error);
+    return null;
+  }
+};

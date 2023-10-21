@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { GraphQLContext } from '../context';
 
 export const userQueryResolver = (
@@ -14,10 +15,14 @@ export const userQueryResolver = (
 
 export const allUsersQueryResolver = (
   parent: unknown,
-  args: {},
+  args: { role: Role },
   context: GraphQLContext
 ) => {
-  return context.prisma.user.findMany();
+  return context.prisma.user.findMany({
+    where: {
+      role: args.role
+    }
+  });
 };
 
 export const allCoursesQueryResolver = (

@@ -20,9 +20,19 @@ const allCoursesSchema = gql`
 `;
 
 const createCourseSchema = gql`
-  mutation ($name: String!, $term: String!, $description: String!) {
+  mutation (
+    $name: String!
+    $term: String!
+    $description: String
+    $syllabusUrl: String
+  ) {
     createCourse(
-      data: { name: $name, term: $term, description: $description }
+      data: {
+        name: $name
+        term: $term
+        description: $description
+        syllabusUrl: $syllabusUrl
+      }
     ) {
       id
     }
@@ -59,4 +69,4 @@ export const createCourse = async (
   }
 };
 
-export const updateCourse = () => {}
+export const updateCourse = () => {};

@@ -9,7 +9,8 @@ import {
   createCourseMutationResolver,
   createSectionMutationResolver,
   createSubmissionMutationResolver,
-  createUserMutationResolver
+  createUserMutationResolver,
+  deleteUserMutationResolver
 } from './resolvers/mutationResolvers';
 import {
   sectionCourseResolver,
@@ -19,7 +20,7 @@ import {
 const queryDefinitions = `
   type Query {
     user(id: ID!): User
-    allUsers: [User!]!
+    allUsers(role: Role!): [User!]!
     allCourses: [Course!]!
   }
 `;
@@ -31,6 +32,7 @@ const mutationDefinitions = `
     createSection(courseId: ID!, teacherId: ID!, active: Boolean): Section!
     createAssignment(data: AssignmentCreateInput, createdByUserId: ID, courseId: ID): Assignment!
     createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!): Submission!
+    deleteUser(id: ID!): Boolean!
   }
 `;
 
@@ -137,7 +139,8 @@ const resolvers = {
     createCourse: createCourseMutationResolver,
     createSection: createSectionMutationResolver,
     createAssignment: createAssignmentMutationResolver,
-    createSubmission: createSubmissionMutationResolver
+    createSubmission: createSubmissionMutationResolver,
+    deleteUser: deleteUserMutationResolver
   },
   User: {
     sections: userSectionsResolver

@@ -1,11 +1,6 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Sidebar() {
-  const pathname = usePathname();
-
   return (
     <aside
       id="default-sidebar"
@@ -87,7 +82,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/students"
+              href="/people/students"
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">
@@ -97,7 +92,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link
-              href="/people"
+              href="/people/staff"
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">

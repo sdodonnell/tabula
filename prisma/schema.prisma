@@ -27,7 +27,7 @@ model Course {
   id          Int       @id @default(autoincrement())
   name        String    @db.VarChar(255)
   term        String    @db.VarChar(255)
-  description String    @db.VarChar(255)
+  description String?   @db.VarChar(255)
   syllabus    String? // URL
   sections    Section[]
 }

@@ -50,3 +50,22 @@ export const createSubmissionMutationResolver = async (
 ) => {
   console.log('hello', args);
 };
+
+export const deleteUserMutationResolver = async (
+  parent: unknown,
+  args: { id: string },
+  context: GraphQLContext
+) => {
+  try {
+    await context.prisma.user.delete({
+      where: {
+        id: parseInt(args.id)
+      }
+    });
+
+    return true;
+  } catch (error) {
+    console.log(`Could not delete user ${args.id}:`, error);
+    return false;
+  }
+};
