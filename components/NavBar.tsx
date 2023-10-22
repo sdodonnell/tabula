@@ -130,14 +130,16 @@ const NavBar = () => (
           data-dropdown-toggle="user-menu-dropdown"
         >
           <span className="sr-only">Open user menu</span>
-          <img
+          <Image
             className="w-8 h-8 rounded-full"
+            height="32"
+            width="32"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
             alt="user photo"
           />
         </button>
         <div
-          className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+          className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
           id="user-menu-dropdown"
         >
           <div className="py-3 px-4">
