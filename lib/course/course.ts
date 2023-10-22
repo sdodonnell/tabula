@@ -41,8 +41,6 @@ const createCourseSchema = gql`
 `;
 
 export const getCourses = async (): Promise<Course[]> => {
-  console.log('process.env: ', process.env);
-
   try {
     const res = await request<Record<'allCourses', Course[]>>(
       GQL_ENDPOINT,
