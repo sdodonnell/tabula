@@ -1,6 +1,6 @@
 'use client';
 
-import { CourseInputVariables, createCourse } from '@/lib/course';
+import { CourseInputVariables, createCourse } from '@/lib/course/course';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 

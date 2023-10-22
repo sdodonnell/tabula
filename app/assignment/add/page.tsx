@@ -1,6 +1,9 @@
 'use client';
 
-import { AssignmentInputVariables, createAssignment } from '@/lib/assignment';
+import {
+  AssignmentInputVariables,
+  createAssignment
+} from '@/lib/assignment/assignment';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +18,7 @@ const DateInput = ({
   return <input type="date" {...field} {...rest} />;
 };
 
-export default function NewUser() {
+export default function NewAssignment() {
   const router = useRouter();
 
   const initialValues: AssignmentInputVariables = {
@@ -55,7 +58,7 @@ export default function NewUser() {
             id="name"
             name="name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Midtern Exam"
+            placeholder="Midterm Exam"
             required
           />
         </div>

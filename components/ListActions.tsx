@@ -16,7 +16,6 @@ const ListActions = ({ id, entityType }: Props) => {
 
   const handleDelete = () => {
     startTransition(() => {
-      console.log(id, entityType, pathname)
       deleteEntity({ id }, entityType, pathname);
     });
   };

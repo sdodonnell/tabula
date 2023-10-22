@@ -3,6 +3,8 @@ import {
   allAssignmentsQueryResolver,
   allCoursesQueryResolver,
   allUsersQueryResolver,
+  assignmentQueryResolver,
+  courseQueryResolver,
   userQueryResolver
 } from './resolvers/queryResolvers';
 import {
@@ -23,6 +25,8 @@ import {
 const queryDefinitions = `
   type Query {
     user(id: ID!): User
+    course(id: ID!): Course
+    assignment(id: ID!): Assignment
     allUsers(role: Role!): [User!]!
     allCourses: [Course!]!
     allAssignments: [Assignment!]!
@@ -75,7 +79,7 @@ const typeDefinitions = `
       id: ID!
       name: String
       description: String
-      file: String
+      filePath: String
       dueDate: Date
       createdDate: Date
       createdBy: User
@@ -137,6 +141,8 @@ const inputDefinitions = `
 const resolvers = {
   Query: {
     user: userQueryResolver,
+    course: courseQueryResolver,
+    assignment: assignmentQueryResolver,
     allUsers: allUsersQueryResolver,
     allCourses: allCoursesQueryResolver,
     allAssignments: allAssignmentsQueryResolver

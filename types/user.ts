@@ -1,4 +1,5 @@
 type Gender = 'Male' | 'Female' | 'Genderfluid';
+type Role = 'STUDENT' | 'TEACHER' | 'ADMIN';
 
 export type User = {
   id: number;
@@ -6,6 +7,7 @@ export type User = {
   lastName: string;
   email: string;
   gender: Gender;
+  role: Role;
 };
 
 export type Student = User & {

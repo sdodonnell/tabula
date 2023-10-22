@@ -13,6 +13,30 @@ export const userQueryResolver = (
   });
 };
 
+export const courseQueryResolver = (
+  parent: unknown,
+  args: { id: string },
+  context: GraphQLContext
+) => {
+  return context.prisma.course.findUnique({
+    where: {
+      id: parseInt(args.id)
+    }
+  });
+};
+
+export const assignmentQueryResolver = (
+  parent: unknown,
+  args: { id: string },
+  context: GraphQLContext
+) => {
+  return context.prisma.assignment.findUnique({
+    where: {
+      id: parseInt(args.id)
+    }
+  });
+};
+
 export const allUsersQueryResolver = (
   parent: unknown,
   args: { role: Role },
