@@ -2,10 +2,10 @@
 
 import { CourseInputVariables, createCourse } from '@/lib/course';
 import { Form, Formik } from 'formik';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function NewUser() {
-
+  const router = useRouter();
   const initialValues: CourseInputVariables = {
     name: '',
     term: ''
@@ -16,7 +16,7 @@ export default function NewUser() {
       initialValues={initialValues}
       onSubmit={async (values, actions) => {
         await createCourse(values);
-        redirect('/students');
+        router.push('/course/all');
       }}
     >
       <Form>

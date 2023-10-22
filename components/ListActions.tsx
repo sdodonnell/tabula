@@ -1,21 +1,23 @@
 'use client';
 
+import { EntityType, deleteEntity } from '@/lib/entity';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTransition } from 'react';
 
 interface Props {
   id: number;
-  deleteUser: Function,
+  entityType: EntityType;
 }
 
-const ListActions = ({ id, deleteUser }: Props) => {
+const ListActions = ({ id, entityType }: Props) => {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
 
   const handleDelete = () => {
     startTransition(() => {
-      deleteUser({ id }, pathname);
+      console.log(id, entityType, pathname)
+      deleteEntity({ id }, entityType, pathname);
     });
   };
 

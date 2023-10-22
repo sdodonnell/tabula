@@ -55,15 +55,15 @@ model SectionsOnStudents {
 model Assignment {
   id          Int          @id @default(autoincrement())
   name        String
-  description String
-  file        String // URL
+  description String?
+  filePath    String? // URL
   dueDate     DateTime
   createdDate DateTime
-  createdBy   User         @relation(fields: [userId], references: [id])
+  createdBy   User?        @relation(fields: [userId], references: [id])
   submissions Submission[]
   Section     Section?     @relation(fields: [sectionId], references: [id])
   sectionId   Int?
-  userId      Int
+  userId      Int?
 }
 
 model Submission {

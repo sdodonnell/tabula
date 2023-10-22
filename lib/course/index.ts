@@ -1,6 +1,6 @@
 import { Course } from '@/types/course';
 import request, { gql } from 'graphql-request';
-import { GQL_ENDPOINT } from './utils';
+import { GQL_ENDPOINT } from '../utils';
 
 export type CourseInputVariables = {
   name: string;

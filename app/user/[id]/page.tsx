@@ -1,4 +1,4 @@
-import { getUser } from '@/lib/user';
+import { getUser } from '@/lib/user/user';
 
 type Props = {
   params: {

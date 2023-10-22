@@ -32,3 +32,11 @@ export const allCoursesQueryResolver = (
 ) => {
   return context.prisma.course.findMany();
 };
+
+export const allAssignmentsQueryResolver = (
+  parent: unknown,
+  args: {},
+  context: GraphQLContext
+) => {
+  return context.prisma.assignment.findMany();
+};

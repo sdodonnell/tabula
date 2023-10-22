@@ -1,12 +1,11 @@
 'use client';
 
-import { UserInputVariables, createUser } from '@/lib/user';
+import { UserInputVariables, createUser } from '@/lib/user/user';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 export default function NewUser() {
   const router = useRouter();
-
   const initialValues: UserInputVariables = {
     firstName: '',
     lastName: '',
@@ -19,9 +18,9 @@ export default function NewUser() {
     <Formik
       initialValues={initialValues}
       onSubmit={async values => {
-        console.log({ values });
         await createUser(values);
-        router.push('/students');
+        const redirectPath = values.role === 'STUDENT' ? 'students' : 'staff';
+        router.push(`/people/${redirectPath}`);
       }}
     >
       <Form>

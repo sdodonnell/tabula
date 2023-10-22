@@ -1,13 +1,27 @@
 'use client';
 
 import { AssignmentInputVariables, createAssignment } from '@/lib/assignment';
-import { Form, Formik } from 'formik';
-import { redirect } from 'next/navigation';
+import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
+import { useRouter } from 'next/navigation';
+
+const DateInput = ({
+  field,
+  form,
+  ...rest
+}: {
+  field: FieldInputProps<string>;
+  form: FormikProps<any>;
+}) => {
+  return <input type="date" {...field} {...rest} />;
+};
 
 export default function NewUser() {
+  const router = useRouter();
+
   const initialValues: AssignmentInputVariables = {
     name: '',
     createdDate: new Date(),
+    dueDate: new Date(),
     createdById: '',
     courseId: ''
   };
@@ -16,92 +30,65 @@ export default function NewUser() {
     <Formik
       initialValues={initialValues}
       onSubmit={async values => {
-        createAssignment(values);
-        redirect('/assignments');
+        // values.dueDate comes through as a string, so we have to convert it to Date object
+        if (typeof values.dueDate === 'string') {
+          values.dueDate = new Date(values.dueDate);
+        }
+
+        try {
+          await createAssignment(values);
+          router.push('/assignment/all');
+        } catch (error) {
+          alert(error);
+        }
       }}
     >
       <Form>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="mb-6">
-            <label
-              htmlFor="first-name"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              First Name
-            </label>
-            <input
-              type="text"
-              id="first-name"
-              name="firstName"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="last-name"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="last-name"
-              name="lastName"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-6 group">
-            <label
-              htmlFor="user-type"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select Type
-            </label>
-            <select
-              id="user-type"
-              name="role"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option value="STUDENT">Student</option>
-              <option value="TEACHER">Teacher</option>
-            </select>
-          </div>
-          <div className="relative z-0 w-full mb-6 group">
-            <label
-              htmlFor="pronoun"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select Pronoun
-            </label>
-            <select
-              id="pronoun"
-              name="gender"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option>He/Him</option>
-              <option>She/Her</option>
-              <option>They/Them</option>
-            </select>
-          </div>
+        <div className="mb-6">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Name
+          </label>
+          <Field
+            id="name"
+            name="name"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Midtern Exam"
+            required
+          />
         </div>
         <div className="mb-6">
           <label
-            htmlFor="email"
+            htmlFor="dueDate"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Email
+            Due Date
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
+          <Field
+            id="dueDate"
+            name="dueDate"
+            component={DateInput}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="example@school.org"
+            placeholder="Spring 2023"
             required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Description
+          </label>
+          <Field
+            id="description"
+            name="description"
+            as="textarea"
+            rows={4}
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Description goes here..."
           />
         </div>
         <button

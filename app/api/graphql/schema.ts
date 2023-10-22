@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import {
+  allAssignmentsQueryResolver,
   allCoursesQueryResolver,
   allUsersQueryResolver,
   userQueryResolver
@@ -10,6 +11,8 @@ import {
   createSectionMutationResolver,
   createSubmissionMutationResolver,
   createUserMutationResolver,
+  deleteAssignmentMutationResolver,
+  deleteCourseMutationResolver,
   deleteUserMutationResolver
 } from './resolvers/mutationResolvers';
 import {
@@ -22,6 +25,7 @@ const queryDefinitions = `
     user(id: ID!): User
     allUsers(role: Role!): [User!]!
     allCourses: [Course!]!
+    allAssignments: [Assignment!]!
   }
 `;
 
@@ -30,9 +34,11 @@ const mutationDefinitions = `
     createUser(data: UserCreateInput!): User!
     createCourse(data: CourseCreateInput!): Course!
     createSection(courseId: ID!, teacherId: ID!, active: Boolean): Section!
-    createAssignment(data: AssignmentCreateInput, createdByUserId: ID, courseId: ID): Assignment!
+    createAssignment(data: AssignmentCreateInput!, createdByUserId: ID, courseId: ID): Assignment!
     createSubmission(data: SubmissionCreateInput, assignmentId: ID!, studentID: ID!): Submission!
     deleteUser(id: ID!): Boolean!
+    deleteCourse(id: ID!): Boolean!
+    deleteAssignment(id: ID!): Boolean!
   }
 `;
 
@@ -114,8 +120,8 @@ const inputDefinitions = `
   }
 
   input AssignmentCreateInput {
-    name: String,
-    description: String,
+    name: String!,
+    description: String!,
     filePath: String,
     dueDate: Date,
     createdDate: Date
@@ -132,7 +138,8 @@ const resolvers = {
   Query: {
     user: userQueryResolver,
     allUsers: allUsersQueryResolver,
-    allCourses: allCoursesQueryResolver
+    allCourses: allCoursesQueryResolver,
+    allAssignments: allAssignmentsQueryResolver
   },
   Mutation: {
     createUser: createUserMutationResolver,
@@ -140,7 +147,9 @@ const resolvers = {
     createSection: createSectionMutationResolver,
     createAssignment: createAssignmentMutationResolver,
     createSubmission: createSubmissionMutationResolver,
-    deleteUser: deleteUserMutationResolver
+    deleteUser: deleteUserMutationResolver,
+    deleteCourse: deleteCourseMutationResolver,
+    deleteAssignment: deleteAssignmentMutationResolver
   },
   User: {
     sections: userSectionsResolver

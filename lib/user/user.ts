@@ -1,7 +1,7 @@
 import { request, gql } from 'graphql-request';
 import { User } from '@/types/user';
 import { Role } from '@prisma/client';
-import { GQL_ENDPOINT } from './utils';
+import { GQL_ENDPOINT } from '../utils';
 import { revalidatePath } from 'next/cache';
 
 export enum USER_ROLES {
@@ -65,12 +65,6 @@ const createUserSchema = gql`
   }
 `;
 
-const deleteUserSchema = gql`
-  mutation ($id: ID!) {
-    deleteUser(id: $id)
-  }
-`;
-
 export const getUser = async (variables: { id: number }) => {
   try {
     const res = await request<Record<'user', User>>(
@@ -117,22 +111,3 @@ export const createUser = async (
 };
 
 export const updateUser = () => {};
-
-export const deleteUser = async (variables: { id: number }, path: string) => {
-  'use server';
-
-  try {
-    const user = await request<Record<'deleteUser', User>>(
-      GQL_ENDPOINT,
-      deleteUserSchema,
-      variables
-    );
-
-    revalidatePath(path);
-
-    return user.deleteUser;
-  } catch (error) {
-    console.log('Could not delete user: ', error);
-    return null;
-  }
-};

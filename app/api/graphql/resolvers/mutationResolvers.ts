@@ -1,6 +1,7 @@
 import { GraphQLContext } from '../context';
 import { CourseInputVariables } from '@/lib/course';
 import { UserInputVariables } from '@/lib/user';
+import { AssignmentInputVariables } from '@/lib/assignment';
 
 export const createUserMutationResolver = async (
   parent: unknown,
@@ -18,14 +19,10 @@ export const createUserMutationResolver = async (
 
 export const createCourseMutationResolver = async (
   parent: unknown,
-  {
-    data
-  }: {
-    data: CourseInputVariables;
-  },
+  args: { data: CourseInputVariables },
   context: GraphQLContext
 ) => {
-  const newCourse = await context.prisma.course.create({ data });
+  const newCourse = await context.prisma.course.create({ data: args.data });
 
   return newCourse;
 };
@@ -38,10 +35,14 @@ export const createSectionMutationResolver = async (
 };
 export const createAssignmentMutationResolver = async (
   parent: unknown,
-  args: {},
+  args: { data: AssignmentInputVariables },
   context: GraphQLContext
 ) => {
-  console.log('hello', args);
+  const newAssignment = await context.prisma.assignment.create({
+    data: args.data
+  });
+
+  return newAssignment;
 };
 export const createSubmissionMutationResolver = async (
   parent: unknown,
@@ -66,6 +67,44 @@ export const deleteUserMutationResolver = async (
     return true;
   } catch (error) {
     console.log(`Could not delete user ${args.id}:`, error);
+    return false;
+  }
+};
+
+export const deleteCourseMutationResolver = async (
+  parent: unknown,
+  args: { id: string },
+  context: GraphQLContext
+) => {
+  try {
+    await context.prisma.course.delete({
+      where: {
+        id: parseInt(args.id)
+      }
+    });
+
+    return true;
+  } catch (error) {
+    console.log(`Could not delete course ${args.id}:`, error);
+    return false;
+  }
+};
+
+export const deleteAssignmentMutationResolver = async (
+  parent: unknown,
+  args: { id: string },
+  context: GraphQLContext
+) => {
+  try {
+    await context.prisma.assignment.delete({
+      where: {
+        id: parseInt(args.id)
+      }
+    });
+
+    return true;
+  } catch (error) {
+    console.log(`Could not delete assignment ${args.id}:`, error);
     return false;
   }
 };

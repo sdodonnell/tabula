@@ -1,15 +1,18 @@
 import { Node } from '@/types';
 import Link from 'next/link';
 import ListActions from './ListActions';
-import { deleteUser } from '@/lib/user';
+import { EntityType } from '@/lib/entity';
+import startCase from 'lodash/startCase';
 
 type DataListProps<T> = {
   data: T[];
+  entityType: EntityType;
   params: Array<string & keyof T>;
 };
 
 export default function DataList<T extends Node>({
   data,
+  entityType,
   params
 }: DataListProps<T>) {
   return (
@@ -18,7 +21,7 @@ export default function DataList<T extends Node>({
         <tr>
           {params.map(param => (
             <th key={param} className="px-6 py-3">
-              {param}
+              {startCase(param)}
             </th>
           ))}
         </tr>
@@ -31,11 +34,11 @@ export default function DataList<T extends Node>({
           >
             {params.map(param => (
               <td key={`${node.id}_${param}`} className="px-6 py-4">
-                <Link href={`/user/${node.id}`}>{node[param]}</Link>
+                <Link href={`/${entityType}/${node.id}`}>{node[param]}</Link>
               </td>
             ))}
             <td>
-              <ListActions id={node.id} deleteUser={deleteUser} />
+              <ListActions id={node.id} entityType={entityType} />
             </td>
           </tr>
         ))}
