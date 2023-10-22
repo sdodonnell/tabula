@@ -1,8 +1,8 @@
 'use server';
 
-import { Course } from '@prisma/client';
 import request, { gql } from 'graphql-request';
 import { GQL_ENDPOINT } from '../utils';
+import { Course } from '@/types';
 
 const courseSchema = gql`
   query ($id: ID!) {

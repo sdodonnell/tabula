@@ -1,8 +1,8 @@
 'use server';
 
-import { Assignment } from '@prisma/client';
 import request, { gql } from 'graphql-request';
 import { GQL_ENDPOINT } from '../utils';
+import { Assignment } from '@/types';
 
 const assignmentSchema = gql`
   query ($id: ID!) {

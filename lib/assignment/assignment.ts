@@ -1,6 +1,6 @@
-import { Assignment } from '@prisma/client';
 import request, { gql } from 'graphql-request';
 import { GQL_ENDPOINT } from '../utils';
+import { Assignment } from '@/types';
 
 // TODO: Add relations as required to this input schema
 export type AssignmentInputVariables = {

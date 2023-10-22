@@ -1,8 +1,6 @@
 import { request, gql } from 'graphql-request';
-import { User } from '@/types/user';
-import { Role } from '@prisma/client';
+import { Role, User } from '@/types/user';
 import { GQL_ENDPOINT } from '../utils';
-import { revalidatePath } from 'next/cache';
 
 export enum USER_ROLES {
   STUDENT = 'STUDENT',

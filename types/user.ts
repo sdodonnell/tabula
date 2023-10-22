@@ -1,5 +1,5 @@
 type Gender = 'Male' | 'Female' | 'Genderfluid';
-type Role = 'STUDENT' | 'TEACHER' | 'ADMIN';
+export type Role = 'STUDENT' | 'TEACHER' | 'ADMIN' | 'PARENT';
 
 export type User = {
   id: number;

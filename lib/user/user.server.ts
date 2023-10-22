@@ -2,8 +2,8 @@
 
 import request, { gql } from 'graphql-request';
 import { GQL_ENDPOINT } from '../utils';
-import { User } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { User } from '@/types';
 
 const deleteUserSchema = gql`
   mutation ($id: ID!) {

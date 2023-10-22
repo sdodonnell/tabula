@@ -2,8 +2,8 @@
 
 import request, { gql } from 'graphql-request';
 import { GQL_ENDPOINT } from '../utils';
-import { Assignment, Course, User } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { Assignment, Course, User } from '@/types';
 
 export type EntityType = 'user' | 'course' | 'assignment';
 
