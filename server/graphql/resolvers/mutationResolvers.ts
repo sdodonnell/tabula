@@ -1,7 +1,7 @@
 import { GraphQLContext } from '../context';
-import { CourseInputVariables } from '@/lib/course/course';
+import { CourseInputVariables } from '@/lib/course';
 import { UserInputVariables } from '@/lib/user';
-import { AssignmentInputVariables } from '@/lib/assignment/assignment';
+import { AssignmentInputVariables } from '@/lib/assignment';
 
 export const createUserMutationResolver = async (
   parent: unknown,

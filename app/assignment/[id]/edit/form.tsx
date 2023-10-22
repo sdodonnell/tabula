@@ -3,7 +3,7 @@
 import {
   AssignmentInputVariables,
   updateAssignment
-} from '@/lib/assignment/assignment';
+} from '@/lib/assignment';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 

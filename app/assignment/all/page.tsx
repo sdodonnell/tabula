@@ -1,5 +1,5 @@
 import DataList from '@/components/DataList';
-import { getAssignments } from '@/lib/assignment/assignment';
+import { getAssignments } from '@/lib/assignment';
 import { Assignment } from '@prisma/client';
 
 export default async function Assignments() {
