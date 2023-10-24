@@ -6,7 +6,7 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
-  gender: Gender;
+  gender: string;
   role: Role;
 };
 
@@ -17,3 +17,16 @@ export type Student = User & {
 export type Teacher = User;
 
 export type UserParam = keyof User;
+
+export enum USER_ROLES {
+  STUDENT = 'STUDENT',
+  TEACHER = 'TEACHER'
+}
+
+export type UserInputVariables = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  email: string;
+  role: Role;
+};

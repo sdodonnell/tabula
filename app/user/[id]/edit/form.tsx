@@ -1,6 +1,7 @@
 'use client';
 
-import { UserInputVariables, updateUser } from '@/lib/user/user';
+import { updateUser } from '@/lib/user';
+import { UserInputVariables } from '@/types';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 

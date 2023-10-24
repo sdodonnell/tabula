@@ -1,11 +1,10 @@
 'use client';
 
-import {
-  AssignmentInputVariables,
-  createAssignment
-} from '@/lib/assignment';
+import { createAssignment } from '@/lib/assignment';
+import { AssignmentInputVariables } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/navigation';
+import { startTransition } from 'react';
 
 const DateInput = ({
   field,
@@ -24,27 +23,29 @@ export default function NewAssignment() {
   const initialValues: AssignmentInputVariables = {
     name: '',
     createdDate: new Date(),
-    dueDate: new Date(),
-    createdById: '',
-    courseId: ''
+    dueDate: new Date()
+  };
+
+  const submitForm = (values: AssignmentInputVariables) => {
+    startTransition(() => {
+      // values.dueDate comes through as a string, so we have to convert it to Date object
+      if (typeof values.dueDate === 'string') {
+        values.dueDate = new Date(values.dueDate);
+      }
+
+      try {
+        createAssignment(values);
+        router.push('/assignment/all');
+      } catch (error) {
+        alert(error);
+      }
+    });
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={async values => {
-        // values.dueDate comes through as a string, so we have to convert it to Date object
-        if (typeof values.dueDate === 'string') {
-          values.dueDate = new Date(values.dueDate);
-        }
-
-        try {
-          await createAssignment(values);
-          router.push('/assignment/all');
-        } catch (error) {
-          alert(error);
-        }
-      }}
+      onSubmit={submitForm}
     >
       <Form>
         <div className="mb-6">
