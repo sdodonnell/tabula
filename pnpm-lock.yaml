@@ -11,6 +11,9 @@ dependencies:
   '@graphql-tools/schema':
     specifier: ^10.0.0
     version: 10.0.0(graphql@16.8.1)
+  '@prisma/client':
+    specifier: ^5.5.0
+    version: 5.5.0
   express:
     specifier: ^4.18.2
     version: 4.18.2
@@ -460,6 +463,23 @@ packages:
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
+  /@prisma/client@5.5.0:
+    resolution: {integrity: sha512-JiCj/h79PRawWiBVa4Ng4tBaKMrfJgUwuRrZi4NuQRd58gWIP4kEYMqIidpUrab3dU2NM617pWRG2avX+dh+Sg==}
+    engines: {node: '>=16.13'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 5.5.0-19.475c616176945d72f4330c92801f0c5e6398dc0f
+    dev: false
+
+  /@prisma/engines-version@5.5.0-19.475c616176945d72f4330c92801f0c5e6398dc0f:
+    resolution: {integrity: sha512-/1orOUq7I54ISYBJockYB15FmF/VkCBeFzYYkWyLtBl2tLlJWHmA3NEUBM+wSmXGLK78BmuSNHrLbf8bmXkukQ==}
     dev: false
 
   /@repeaterjs/repeater@3.0.4:
