@@ -25,5 +25,5 @@
     "baseUrl": "./app"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "later"]
+  "exclude": ["node_modules", "later", "**/*.gql.ts"]
 }
