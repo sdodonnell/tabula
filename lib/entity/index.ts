@@ -1,1 +1,1 @@
-export * from './entity.server';
+export * from './entity.gql';
