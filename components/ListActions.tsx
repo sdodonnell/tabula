@@ -1,6 +1,6 @@
 'use client';
 
-import { EntityType } from '@/lib/entity';
+import { EntityType } from '@/types/utils';
 import { deleteUser } from '@/lib/user';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -22,7 +22,7 @@ const ListActions = ({ id, entityType }: Props) => {
   };
 
   return (
-    <> 
+    <>
       <Link as="button" href={`/user/${id}/edit`}>
         Edit
       </Link>

@@ -1,7 +1,7 @@
 'use server';
 
-import { PrismaClient, Role } from '@prisma/client';
-import { User, UserInputVariables } from '@/types/user';
+import { PrismaClient } from '@prisma/client';
+import { User, UserInputVariables, Role } from '@/types';
 import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
