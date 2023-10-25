@@ -1,7 +1,7 @@
 import { Node } from '@/types';
 import Link from 'next/link';
 import ListActions from './ListActions';
-import { EntityType } from '@/lib/entity';
+import { EntityType } from '@/types';
 import startCase from 'lodash/startCase';
 
 type DataListProps<T> = {
