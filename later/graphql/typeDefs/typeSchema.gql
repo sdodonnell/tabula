@@ -1,0 +1,57 @@
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  gender: String
+  email: String
+  role: Role
+  sections: [Section!]!
+}
+
+type Course {
+  id: ID!
+  name: String
+  term: String
+  description: String
+  syllabus: String
+  sections: [Section!]!
+}
+
+type Section {
+  id: ID!
+  active: Boolean
+  teacher: User
+  students: [User!]!
+  assignments: [Assignment!]!
+  course: Course!
+}
+
+type Assignment {
+  id: ID!
+  name: String
+  description: String
+  file: String
+  dueDate: Date
+  createdDate: Date
+  createdBy: User
+  submissions: [Submission!]!
+  section: Section
+}
+
+type Submission {
+  id: ID!
+  grade: Int
+  submittedDate: Date
+  feedback: String
+  assignment: Assignment!
+  student: User!
+}
+
+scalar Date @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time")
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+  PARENT
+}

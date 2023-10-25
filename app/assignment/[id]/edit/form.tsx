@@ -1,9 +1,7 @@
 'use client';
 
-import {
-  AssignmentInputVariables,
-  updateAssignment
-} from '@/lib/assignment';
+import { updateAssignment } from '@/lib/assignment';
+import { AssignmentInputVariables } from '@/types';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 

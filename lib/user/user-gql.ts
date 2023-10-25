@@ -1,6 +1,8 @@
 import { request, gql } from 'graphql-request';
-import { Role, User } from '@/types/user';
+import { User } from '@/types/user';
+import { PrismaClient, Role } from '@prisma/client';
 import { GQL_ENDPOINT } from '../utils';
+import { revalidatePath } from 'next/cache';
 
 export enum USER_ROLES {
   STUDENT = 'STUDENT',
@@ -63,6 +65,8 @@ const createUserSchema = gql`
   }
 `;
 
+const prisma = new PrismaClient();
+
 export const getUser = async (variables: { id: number }) => {
   try {
     const res = await request<Record<'user', User>>(
@@ -85,6 +89,7 @@ export const getUsers = async (variables: { role: Role }): Promise<User[]> => {
       variables
     );
     return res.allUsers;
+
   } catch (error) {
     console.log('Could not fetch user data: ', error);
     return [];
@@ -109,3 +114,26 @@ export const createUser = async (
 };
 
 export const updateUser = () => {};
+
+const deleteUserSchema = gql`
+  mutation ($id: ID!) {
+    deleteUser(id: $id)
+  }
+`;
+
+export const deleteUser = async (variables: { id: number }, path: string) => {
+  try {
+    const user = await request<Record<'deleteUser', User>>(
+      GQL_ENDPOINT,
+      deleteUserSchema,
+      variables
+    );
+
+    revalidatePath(path);
+
+    return user.deleteUser;
+  } catch (error) {
+    console.log('Could not delete user: ', error);
+    return null;
+  }
+};

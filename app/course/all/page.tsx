@@ -1,5 +1,5 @@
 import DataList from '@/components/DataList';
-import { getCourses } from '@/lib/course/course';
+import { getCourses } from '@/lib/course';
 import { Course } from '@/types';
 
 export default async function Courses() {

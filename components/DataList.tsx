@@ -10,8 +10,16 @@ type DataListProps<T> = {
   params: Array<string & keyof T>;
 };
 
+const stringify = (param: any): string => {
+  if (param instanceof Date) {
+    return param.toDateString();
+  } else {
+    return param;
+  }
+};
+
 export default function DataList<T extends Node>({
-  data,
+  data = [],
   entityType,
   params
 }: DataListProps<T>) {
@@ -34,7 +42,9 @@ export default function DataList<T extends Node>({
           >
             {params.map(param => (
               <td key={`${node.id}_${param}`} className="px-6 py-4">
-                <Link href={`/${entityType}/${node.id}`}>{node[param]}</Link>
+                <Link href={`/${entityType}/${node.id}`}>
+                  {stringify(node[param])}
+                </Link>
               </td>
             ))}
             <td>

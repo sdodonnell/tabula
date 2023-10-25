@@ -1,6 +1,7 @@
 'use client';
 
-import { CourseInputVariables, createCourse } from '@/lib/course/course';
+import { createCourse } from '@/lib/course';
+import { CourseInputVariables } from '@/types';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 
@@ -14,7 +15,7 @@ export default function NewUser() {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={async (values) => {
+      onSubmit={async values => {
         await createCourse(values);
         router.push('/course/all');
       }}

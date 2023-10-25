@@ -71,3 +71,29 @@ export const createCourse = async (
 };
 
 export const updateCourse = () => {};
+
+const courseSchema = gql`
+  query ($id: ID!) {
+    course(id: $id) {
+      id
+      name
+      term
+      description
+      syllabus
+    }
+  }
+`;
+
+export const getCourse = async (variables: { id: number }) => {
+  try {
+    const res = await request<Record<'course', Course>>(
+      GQL_ENDPOINT,
+      courseSchema,
+      variables
+    );
+    return res.course;
+  } catch (error) {
+    console.log('Could not fetch course data: ', error);
+    return null;
+  }
+};

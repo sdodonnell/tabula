@@ -1,5 +1,5 @@
-import { USER_ROLES, getUsers } from '@/lib/user/user';
-import { User, UserParam } from '@/types/user';
+import { getUsers } from '@/lib/user';
+import { USER_ROLES, User, UserParam } from '@/types/user';
 import DataList from '@/components/DataList';
 
 export default async function Students() {
