@@ -9,7 +9,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Tabula',
-  description: 'Tabula - a new LMS'
+  description: 'Tabula - a new LMS',
+  robots: 'noindex'
 };
 
 export default function RootLayout({
