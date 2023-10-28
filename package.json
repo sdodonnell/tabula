@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:server": "ts-node --esm ./server/index.ts",
     "build": "next build",
-    "build:server": "tsc ./server --outDir ./server/dist",
     "start": "next start",
-    "start:server": "node ./server/dist/index.js",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "dev:server": "ts-node --esm ./server/index.ts",
+    "build:server": "tsc ./server --outDir ./server/dist",
+    "start:server": "node ./server/dist/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.5.0",
