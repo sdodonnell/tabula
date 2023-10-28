@@ -31,7 +31,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const transactions: PrismaPromise<any>[] = [];
-  transactions.push(prisma.$executeRaw`SET FOREIGN_KEY_CHECKS = 0;`);
+  transactions.push(prisma.$executeRaw`SET CONSTRAINTS ALL DEFERRED;`);
 
   const tablenames = await prisma.$queryRaw<
     Array<{ TABLE_NAME: string }>
@@ -47,7 +47,7 @@ async function main() {
     }
   }
 
-  transactions.push(prisma.$executeRaw`SET FOREIGN_KEY_CHECKS = 1;`);
+  transactions.push(prisma.$executeRaw`SET CONSTRAINTS ALL IMMEDIATE;`);
 
   try {
     await prisma.$transaction(transactions);
