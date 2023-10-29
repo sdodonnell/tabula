@@ -1,6 +1,6 @@
 'use server';
 
-import { Course, CourseInputVariables } from '@/types/course';
+import { Course, CourseInputVariables, Section } from '@/types/course';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -11,6 +11,27 @@ export const getCourses = async (): Promise<Course[]> => {
     return courses;
   } catch (error) {
     console.log('Could not fetch course data: ', error);
+    return [];
+  }
+};
+
+export const getSectionsForTeacher = async (variables: {
+  id: number;
+}): Promise<Section[]> => {
+  try {
+    const sections = await prisma.section.findMany({
+      where: {
+        teacherId: variables.id
+      },
+      include: {
+        course: true,
+        teacher: true
+      }
+    });
+
+    return sections;
+  } catch (error) {
+    console.log('Could not fetch user data: ', error);
     return [];
   }
 };
