@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:server": "ts-node --esm ./server/index.ts",
+    "dev": "next dev -H dev.tabulalms.com",
     "build": "next build",
-    "build:server": "tsc ./server --outDir ./server/dist",
     "start": "next start",
-    "start:server": "node ./server/dist/index.js",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "dev:server": "ts-node --esm ./server/index.ts",
+    "build:server": "tsc ./server --outDir ./server/dist",
+    "start:server": "node ./server/dist/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.5.0",
@@ -19,6 +19,7 @@
     "formik": "^2.4.5",
     "lodash": "^4.17.21",
     "next": "13.5.6",
+    "next-auth": "^4.24.4",
     "prisma": "^5.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -30,3 +30,11 @@ export type UserInputVariables = {
   email: string;
   role: Role;
 };
+
+export type UserSession = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  }
+};

@@ -1,6 +1,11 @@
+import { getLoggedInUser } from '@/lib/user';
 import Link from 'next/link';
 
-export default function Sidebar() {
+export default async function Sidebar() {
+  const currentUser = await getLoggedInUser();
+
+  if (!currentUser) return null;
+
   return (
     <aside
       id="default-sidebar"
@@ -26,8 +31,7 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
-        <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
-          <li>
+        {/* <li>
             <button
               type="button"
               className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -56,7 +60,7 @@ export default function Sidebar() {
             <ul id="academics-dropdown" className="hidden py-2 space-y-2">
               <li>
                 <Link
-                  href="/my-classes"
+                  href={`/user/${currentUser.id}/students`}
                   className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 >
                   My Classes
@@ -71,15 +75,26 @@ export default function Sidebar() {
                 </Link>
               </li>
             </ul>
-          </li>
+          </li> */}
+        <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
           <li>
             <Link
-              href="/my-students"
+              href={`/user/${currentUser.id}/students`}
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">My Students</span>
             </Link>
           </li>
+          <li>
+            <Link
+              href={`/user/${currentUser.id}/courses`}
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span className="flex-1 ml-3 whitespace-nowrap">My Courses</span>
+            </Link>
+          </li>
+        </ul>
+        <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
           <li>
             <Link
               href="/people/students"
