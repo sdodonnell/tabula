@@ -1,14 +1,13 @@
 import { getUser } from '@/lib/user';
+import { URLParams } from '@/types';
 
-type Props = {
-  params: {
-    id: number;
-  };
-};
+interface Props {
+  params: URLParams;
+}
 
 export default async function User({ params }: Props) {
   const { id } = params;
-  const user = await getUser({ id });
+  const user = await getUser({ id: parseInt(id) });
 
   return (
     <>

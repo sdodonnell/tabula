@@ -1,15 +1,14 @@
+import { URLParams } from '@/types';
 import EditUserForm from './form';
 import { getUser } from '@/lib/user';
 
-type Props = {
-  params: {
-    id: number;
-  };
-};
+interface Props {
+  params: URLParams;
+}
 
 export default async function EditAssignment({ params }: Props) {
   const { id } = params;
-  const user = await getUser({ id });
+  const user = await getUser({ id: parseInt(id) });
 
   if (!user) return null;
 

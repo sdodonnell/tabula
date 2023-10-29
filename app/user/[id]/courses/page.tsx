@@ -18,6 +18,6 @@ export default async function Courses({ params }: Props) {
   const listParams: Array<keyof Course> = ['name', 'term', 'description'];
 
   return (
-    <DataList<Course> data={courses} params={listParams} entityType="user" />
+    <DataList<Course> data={courses} params={listParams} entityType="course" />
   );
 }
