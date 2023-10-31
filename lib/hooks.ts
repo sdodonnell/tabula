@@ -21,7 +21,7 @@ export const useEditor = (id: string, setValue: Function) => {
         },
         onChange: async (api, event) => {
           const data = await api.saver.save();
-          setValue(data);
+          setValue(data.blocks);
         }
       });
     }

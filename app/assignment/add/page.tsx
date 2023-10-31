@@ -5,7 +5,6 @@ import { AssignmentInputVariables, EditorBlock } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/navigation';
 import { startTransition, useState } from 'react';
-import { useEditor } from '@/lib/hooks';
 import dynamic from 'next/dynamic';
 
 const Editor = dynamic(() => import('@/components/Editor'), {
