@@ -1,10 +1,16 @@
 'use client';
 
 import { createAssignment } from '@/lib/assignment';
-import { AssignmentInputVariables } from '@/types';
+import { AssignmentInputVariables, EditorBlock } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/navigation';
-import { startTransition } from 'react';
+import { startTransition, useState } from 'react';
+import { useEditor } from '@/lib/hooks';
+import dynamic from 'next/dynamic';
+
+const Editor = dynamic(() => import('@/components/Editor'), {
+  ssr: false
+});
 
 const DateInput = ({
   field,
@@ -19,6 +25,7 @@ const DateInput = ({
 
 export default function NewAssignment() {
   const router = useRouter();
+  const [editorValue, setValue] = useState<EditorBlock[]>([]);
 
   const initialValues: AssignmentInputVariables = {
     name: '',
@@ -26,12 +33,18 @@ export default function NewAssignment() {
     dueDate: new Date()
   };
 
-  const submitForm = (values: AssignmentInputVariables) => {
+  const submitForm = async (values: AssignmentInputVariables) => {
+    if (editorValue) {
+      values.body = editorValue;
+    }
+
     startTransition(() => {
       // values.dueDate comes through as a string, so we have to convert it to Date object
       if (typeof values.dueDate === 'string') {
         values.dueDate = new Date(values.dueDate);
       }
+
+      console.log(values);
 
       try {
         createAssignment(values);
@@ -43,10 +56,7 @@ export default function NewAssignment() {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={submitForm}
-    >
+    <Formik initialValues={initialValues} onSubmit={submitForm}>
       <Form>
         <div className="mb-6">
           <label
@@ -81,19 +91,12 @@ export default function NewAssignment() {
         </div>
         <div className="mb-6">
           <label
-            htmlFor="description"
+            htmlFor="assignment-body"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Description
           </label>
-          <Field
-            id="description"
-            name="description"
-            as="textarea"
-            rows={4}
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Description goes here..."
-          />
+          <Editor id="assignment-body" setValue={setValue} />
         </div>
         <button
           type="submit"

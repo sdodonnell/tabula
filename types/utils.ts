@@ -10,3 +10,9 @@ export type EntityType = 'user' | 'course' | 'assignment';
 export type URLParams = {
   id: string;
 };
+
+export type EditorBlock = {
+  id?: string;
+  type: string;
+  data: object;
+};
