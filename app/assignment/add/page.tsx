@@ -1,11 +1,10 @@
-import { AssignmentInputVariables } from '@/types';
+import { Assignment, AssignmentInputVariables } from '@/types';
 import EditAssignmentForm from 'assignment/form';
 
 export default function NewAssignment() {
   const initialValues: AssignmentInputVariables = {
     name: '',
-    createdDate: new Date(),
-    dueDate: new Date()
+    dueDate: new Date().toISOString()
   };
 
   return (

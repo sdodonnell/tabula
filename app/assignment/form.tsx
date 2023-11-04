@@ -2,13 +2,13 @@
 
 import Editor from '@/components/Editor';
 import { createAssignment, updateAssignment } from '@/lib/assignment';
-import { Assignment, AssignmentInputVariables, EditorData } from '@/types';
+import { AssignmentInputVariables, EditorData } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/navigation';
 import { startTransition, useState } from 'react';
 
 interface Props {
-  initialValues: Assignment;
+  initialValues: AssignmentInputVariables;
   route: string;
 }
 
@@ -70,15 +70,8 @@ export default function EditAssignmentForm({ initialValues, route }: Props) {
     });
   };
 
-  // Some values in the HTML form do not correspond to the types we expect in the database, namely Dates.
-  // This transforms the relevant values so we render the right thing in the form inputs.
-  const initialFormValues = {
-    ...initialValues,
-    dueDate: initialValues.dueDate.toISOString()
-  };
-
   return (
-    <Formik initialValues={initialFormValues} onSubmit={submitForm}>
+    <Formik initialValues={initialValues} onSubmit={submitForm}>
       <Form>
         <div className="mb-6">
           <label

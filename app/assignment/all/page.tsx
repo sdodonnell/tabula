@@ -4,7 +4,7 @@ import { Assignment } from '@/types';
 
 export default async function Assignments() {
   const assignments = await getAssignments();
-  const params: Array<keyof Assignment> = ['name', 'description', 'dueDate'];
+  const params: Array<keyof Assignment> = ['name', 'dueDate'];
 
   return (
     <DataList<Assignment>
