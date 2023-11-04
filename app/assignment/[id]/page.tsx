@@ -1,14 +1,18 @@
 import { getAssignment } from '@/lib/assignment';
+import { URLParams } from '@/types';
+import dynamic from 'next/dynamic';
 
-type Props = {
-  params: {
-    id: number;
-  };
-};
+const Document = dynamic(() => import('@/components/Document'), {
+  ssr: false
+});
+
+interface Props {
+  params: URLParams;
+}
 
 export default async function Assignment({ params }: Props) {
   const { id } = params;
-  const assignment = await getAssignment({ id });
+  const assignment = await getAssignment({ id: parseInt(id) });
 
   return (
     <>
@@ -17,9 +21,11 @@ export default async function Assignment({ params }: Props) {
       <p>Name: {assignment?.name}</p>
       <p>
         Due:{' '}
-        {assignment?.dueDate ? new Date(assignment.dueDate).toLocaleDateString('en-US') : ''}
+        {assignment?.dueDate
+          ? new Date(assignment.dueDate).toLocaleDateString('en-US')
+          : ''}
       </p>
-      <p> Description: {assignment?.description}</p>
+      {assignment?.body && <Document body={assignment.body} />}
     </>
   );
 }

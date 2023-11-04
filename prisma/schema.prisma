@@ -56,7 +56,7 @@ model SectionsOnStudents {
 model Assignment {
   id          Int          @id @default(autoincrement())
   name        String
-  description String?
+  body        Json?
   filePath    String? // URL
   dueDate     DateTime
   createdDate DateTime
