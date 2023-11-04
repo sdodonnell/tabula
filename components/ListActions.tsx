@@ -23,7 +23,7 @@ const ListActions = ({ id, entityType }: Props) => {
 
   return (
     <>
-      <Link as="button" href={`/user/${id}/edit`}>
+      <Link href={`/${entityType}/${id}/edit`}>
         Edit
       </Link>
       {' | '}

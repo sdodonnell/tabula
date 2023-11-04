@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export const getAssignments = async (): Promise<Assignment[]> => {
   try {
-    const assignments = await prisma.assignment.findMany();
+    const assignments = (await prisma.assignment.findMany()) as Assignment[];
     return assignments;
   } catch (error) {
     console.log('Could not fetch course data: ', error);
@@ -19,9 +19,9 @@ export const getAssignment = async (variables: {
   id: number;
 }): Promise<Assignment | null> => {
   try {
-    const assignment = await prisma.assignment.findUnique({
+    const assignment = (await prisma.assignment.findUnique({
       where: { id: variables.id }
-    });
+    })) as Assignment;
     return assignment;
   } catch (error) {
     console.log('Could not fetch assignment data: ', error);
@@ -32,12 +32,41 @@ export const getAssignment = async (variables: {
 export const createAssignment = async (
   variables: AssignmentInputVariables
 ): Promise<number | null> => {
+  // values.dueDate comes through as a string, so we have to convert it to Date object
+  const createAssignmentVariables = {
+    ...variables,
+    dueDate: new Date(variables.dueDate),
+    createdDate: new Date()
+  };
+
   try {
-    const assignment = await prisma.assignment.create({ data: variables });
+    const assignment = await prisma.assignment.create({
+      data: createAssignmentVariables
+    });
     return assignment.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);
   }
 };
 
-export const updateAssignment = async () => {};
+export const updateAssignment = async (variables: {
+  id: number;
+  data: AssignmentInputVariables;
+}): Promise<number | null> => {
+  // values.dueDate comes through as a string, so we have to convert it to Date object
+  const updateAssignmentVariables = {
+    ...variables.data,
+    dueDate: new Date(variables.data.dueDate),
+    createdDate: new Date()
+  };
+
+  try {
+    const assignment = await prisma.assignment.update({
+      where: { id: variables.id },
+      data: updateAssignmentVariables
+    });
+    return assignment.id;
+  } catch (error) {
+    throw new Error(`Could not create course: ${error}`);
+  }
+};

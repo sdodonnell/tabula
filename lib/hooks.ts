@@ -6,8 +6,16 @@ import Checklist from '@editorjs/checklist';
 import SimpleImage from '@editorjs/simple-image';
 
 import EditorJS from '@editorjs/editorjs';
+import { EditorData } from '@/types';
 
-export const useEditor = (id: string, setValue: Function) => {
+interface Props {
+  id: string,
+  setValue?: Function | null,
+  readOnly?: boolean
+  data?: EditorData | null
+}
+
+export const useEditor = ({ id, setValue, readOnly = false, data = null }: Props) => {
   const editor = useRef(null);
 
   useEffect(() => {
@@ -19,10 +27,14 @@ export const useEditor = (id: string, setValue: Function) => {
           checklist: Checklist,
           image: SimpleImage
         },
-        onChange: async (api, event) => {
-          const data = await api.saver.save();
-          setValue(data.blocks);
-        }
+        data,
+        readOnly,
+        onChange: readOnly
+          ? null
+          : async (api, event) => {
+              const data = await api.saver.save();
+              setValue(data);
+            }
       });
     }
     return () => {

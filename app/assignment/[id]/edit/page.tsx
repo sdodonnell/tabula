@@ -1,5 +1,5 @@
 import { getAssignment } from '@/lib/assignment';
-import EditAssignmentForm from './form';
+import EditAssignmentForm from '../../form';
 import { URLParams } from '@/types';
 
 interface Props {
@@ -13,5 +13,7 @@ export default async function EditAssignment({ params }: Props) {
   if (!assignment) return null;
 
   // TODO: Wrap in Suspense
-  return <EditAssignmentForm initialValues={assignment} />;
+  return (
+    <EditAssignmentForm initialValues={assignment} route="/assignment/all" />
+  );
 }

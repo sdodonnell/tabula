@@ -1,9 +1,9 @@
-import { EditorBlock } from "./utils";
+import { EditorData } from './utils';
 
 export interface Assignment {
   id: number;
   name: string;
-  body: string | null;
+  body: EditorData;
   filePath: string | null;
   dueDate: Date;
   createdDate: Date;
@@ -13,9 +13,9 @@ export interface Assignment {
 
 // TODO: Add relations as required to this input schema
 export type AssignmentInputVariables = {
+  id?: number;
   name: string;
-  body?: EditorBlock[];
+  body?: EditorData;
   filePath?: string | null;
-  dueDate: Date;
-  createdDate: Date;
+  dueDate: string;
 };

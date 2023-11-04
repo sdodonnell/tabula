@@ -11,8 +11,14 @@ export type URLParams = {
   id: string;
 };
 
-export type EditorBlock = {
+type EditorBlock = {
   id?: string;
   type: string;
   data: object;
 };
+
+export type EditorData = {
+  time: number;
+  blocks: EditorBlock[],
+  version: string;
+}
