@@ -16,6 +16,7 @@ export interface Section {
 }
 
 export type CourseInputVariables = {
+  id?: number;
   name: string;
   term: string;
   description?: string;

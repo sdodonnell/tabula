@@ -6,7 +6,7 @@ interface Props {
   params: URLParams;
 }
 
-export default async function EditAssignment({ params }: Props) {
+export default async function EditUser({ params }: Props) {
   const { id } = params;
   const user = await getUser({ id: parseInt(id) });
 

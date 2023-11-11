@@ -1,9 +1,9 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NavBar from './NavBar';
-import Sidebar from './Sidebar';
-import UserMenu from './UserMenu';
+import NavBar from '../components/Navigation/NavBar';
+import Sidebar from '../components/Navigation/Sidebar';
+import UserMenu from '../components/Navigation/UserMenu';
 
 const session = {
   user: {
