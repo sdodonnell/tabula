@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
+import { User } from '@/types';
+
 interface Props {
-  currentUser: UserSession;
+  currentUser: User;
 }
 
 export default async function Sidebar({ currentUser }: Props) {
