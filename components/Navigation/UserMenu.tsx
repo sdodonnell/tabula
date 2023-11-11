@@ -19,6 +19,7 @@ const UserMenu = () => {
         type="button"
         className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         id="user-menu-button"
+        name="user-menu-button"
         aria-expanded="false"
         data-dropdown-toggle="user-menu-dropdown"
       >
@@ -36,6 +37,7 @@ const UserMenu = () => {
       <div
         className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
         id="user-menu-dropdown"
+        data-testid="user-menu-dropdown"
       >
         <div className="py-3 px-4">
           <span className="block text-sm font-semibold text-gray-900 dark:text-white">
