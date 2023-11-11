@@ -1,9 +1,13 @@
+'use client';
+
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { auth } from '@/lib/auth';
 import { UserSession } from '@/types';
 
-const UserMenu = async () => {
-  const session: UserSession | null = await auth();
+const UserMenu = () => {
+  // const session: UserSession | null = await auth();
+  const { data: session } = useSession();
 
   if (!session) return null;
 

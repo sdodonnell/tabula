@@ -1,6 +1,6 @@
 'use client';
 
-import Editor from '@/components/Editor';
+import Editor from '@/components/Document/Editor';
 import { createAssignment, updateAssignment } from '@/lib/assignment';
 import { AssignmentInputVariables, EditorData } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';

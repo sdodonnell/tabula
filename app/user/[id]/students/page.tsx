@@ -1,6 +1,6 @@
 import { getStudentsForTeacher } from '@/lib/user';
 import { User, UserParam } from '@/types/user';
-import DataList from '@/components/DataList';
+import DataList from '@/components/DataDisplay/DataList';
 import { URLParams } from '@/types';
 
 interface Props {
