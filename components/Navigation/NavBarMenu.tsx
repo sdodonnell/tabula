@@ -1,10 +1,12 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
-import AppDropdown from './AppDropdown';
-import UserMenu from './UserMenu';
-import Notifications from './Notifications';
+
 import { UserSession } from '@/types';
+
+import AppDropdown from './AppDropdown';
+import Notifications from './Notifications';
+import UserMenu from './UserMenu';
 
 interface Props {
   session: UserSession | null;

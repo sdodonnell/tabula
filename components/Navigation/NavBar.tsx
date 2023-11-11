@@ -1,9 +1,12 @@
-import React from 'react';
-import SearchBar from './SearchBar';
-import Link from 'next/link';
 import Image from 'next/image';
-import NavBarMenu from './NavBarMenu';
+import Link from 'next/link';
+import React from 'react';
+
 import { auth } from '@/lib/auth';
+import { UserSession } from '@/types';
+
+import NavBarMenu from './NavBarMenu';
+import SearchBar from './SearchBar';
 
 const NavBar = async () => {
   const session: UserSession | null = await auth();
