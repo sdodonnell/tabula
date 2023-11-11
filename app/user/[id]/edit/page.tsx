@@ -1,5 +1,5 @@
 import { URLParams } from '@/types';
-import EditUserForm from './form';
+import EditUserForm from '../../form';
 import { getUser } from '@/lib/user';
 
 interface Props {
@@ -13,5 +13,5 @@ export default async function EditUser({ params }: Props) {
   if (!user) return null;
 
   // TODO: Wrap in Suspense
-  return <EditUserForm initialValues={user} />;
+  return <EditUserForm initialValues={user} route={`/user/${id}`} />;
 }

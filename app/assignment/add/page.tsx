@@ -1,4 +1,4 @@
-import { Assignment, AssignmentInputVariables } from '@/types';
+import type { AssignmentInputVariables } from '@/types';
 import EditAssignmentForm from 'assignment/form';
 
 export default function NewAssignment() {

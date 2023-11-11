@@ -5,6 +5,7 @@ import { UserInputVariables } from '@/types';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { startTransition } from 'react';
+import EditUserForm from 'user/form';
 
 export default function NewUser() {
   const router = useRouter();
@@ -16,6 +17,8 @@ export default function NewUser() {
     role: 'STUDENT'
   };
 
+  return <EditUserForm initialValues={initialValues} route="/user/all" />;
+
   return (
     <Formik
       initialValues={initialValues}
@@ -24,7 +27,7 @@ export default function NewUser() {
           createUser(values);
           const redirectPath = values.role === 'STUDENT' ? 'students' : 'staff';
           router.push(`/people/${redirectPath}`);
-        })
+        });
       }}
     >
       <Form>

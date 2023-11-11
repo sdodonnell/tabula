@@ -1,6 +1,6 @@
-import { getAssignment } from '@/lib/assignment';
-import EditAssignmentForm from '../../form';
-import { AssignmentInputVariables, URLParams } from '@/types';
+import EditCourseForm from '../../form';
+import { CourseInputVariables, URLParams } from '@/types';
+import { getCourse } from '@/lib/course';
 
 interface Props {
   params: URLParams;
@@ -8,20 +8,21 @@ interface Props {
 
 export default async function EditCourse({ params }: Props) {
   const { id } = params;
-  const assignment = await getAssignment({ id: parseInt(id) });
+  const course = await getCourse({ id: parseInt(id) });
 
-  if (!assignment) return null;
+  if (!course) return null;
 
-  const initialValues: AssignmentInputVariables = {
-    ...assignment,
-    dueDate: assignment.dueDate.toISOString()
+  const initialValues: CourseInputVariables = {
+    ...course,
+    description: course.description || '',
+    syllabus: course.syllabus || ''
   };
 
   // TODO: Wrap in Suspense
   return (
-    <EditAssignmentForm
+    <EditCourseForm
       initialValues={initialValues}
-      route={`/assignment/${id}/edit`}
+      route={`/course/${id}/edit`}
     />
   );
 }

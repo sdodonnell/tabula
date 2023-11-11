@@ -24,6 +24,7 @@ export enum USER_ROLES {
 }
 
 export type UserInputVariables = {
+  id?: number;
   firstName: string;
   lastName: string;
   gender: string;
