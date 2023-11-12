@@ -1,15 +1,17 @@
+import { render, screen, waitFor } from '@testing-library/react';
+
+import NewAssignment from '@/app/assignment/add/page';
+import EditAssignmentForm from '@/app/assignment/form';
+import NewCourse from '@/app/course/add/page';
+import EditCourseForm from '@/app/course/form';
+import NewUser from '@/app/user/add/page';
+import EditUserForm from '@/app/user/form';
+import { formatDateTime } from '@/lib/utils';
 import {
   AssignmentInputVariables,
   CourseInputVariables,
   UserInputVariables
 } from '@/types';
-import { render } from '@testing-library/react';
-import NewAssignment from 'assignment/add/page';
-import EditAssignmentForm from 'assignment/form';
-import NewCourse from 'course/add/page';
-import NewUser from 'course/add/page';
-import EditCourseForm from 'course/form';
-import EditUserForm from 'user/form';
 
 const mockUserValues: UserInputVariables = {
   id: 1,
@@ -37,6 +39,11 @@ describe('Forms', () => {
   describe('User Form', () => {
     test('A new user form renders with blank input', () => {
       render(<NewUser />);
+      expect(screen.getByLabelText('First Name')).toHaveValue('');
+      expect(screen.getByLabelText('Last Name')).toHaveValue('');
+      expect(screen.getByLabelText('Select Type')).toHaveValue('STUDENT');
+      expect(screen.getByLabelText('Select Pronoun')).toHaveValue('He/Him');
+      expect(screen.getByLabelText('Email')).toHaveValue('');
     });
 
     test('An edit user form renders with prepopulated input', () => {
@@ -45,8 +52,16 @@ describe('Forms', () => {
   });
 
   describe('Assignment Form', () => {
-    test('A new assignment form renders with blank input', () => {
+    test('A new assignment form renders with blank input', async () => {
       render(<NewAssignment />);
+      await waitFor(() => {
+        expect(screen.getByLabelText('Name')).toHaveValue('');
+      });
+      await waitFor(() => {
+        expect(screen.getByLabelText('Due Date')).toHaveValue(
+          formatDateTime(new Date().toISOString())
+        );
+      });
     });
 
     test('An edit assignment form renders with prepopulated input', () => {
@@ -62,6 +77,9 @@ describe('Forms', () => {
   describe('Course Form', () => {
     test('A new course form renders with blank input', () => {
       render(<NewCourse />);
+      expect(screen.getByLabelText('Name')).toHaveValue('');
+      expect(screen.getByLabelText('Term')).toHaveValue('');
+      expect(screen.getByLabelText('Description')).toHaveValue('');
     });
 
     test('An edit course form renders with prepopulated input', () => {

@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic';
+
 import { getAssignment } from '@/lib/assignment';
 import { URLParams } from '@/types';
-import dynamic from 'next/dynamic';
 
 const Document = dynamic(() => import('@/components/Document/Document'), {
   ssr: false

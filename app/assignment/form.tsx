@@ -1,11 +1,17 @@
 'use client';
 
-import Editor from '@/components/Document/Editor';
-import { createAssignment, updateAssignment } from '@/lib/assignment';
-import { AssignmentInputVariables, EditorData } from '@/types';
 import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { startTransition, useState } from 'react';
+
+import { createAssignment, updateAssignment } from '@/lib/assignment';
+import { formatDateTime } from '@/lib/utils';
+import { AssignmentInputVariables, EditorData } from '@/types';
+
+const Editor = dynamic(() => import('@/components/Document/Editor'), {
+  ssr: false
+});
 
 interface Props {
   initialValues: AssignmentInputVariables;
@@ -20,29 +26,13 @@ const DateInput = ({
   field: FieldInputProps<string>;
   form: FormikProps<any>;
 }) => {
-  const formatDateTime = (date: string) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    let hour = '' + d.getHours();
-    let minutes = '' + d.getMinutes();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    if (hour.length < 2) hour = '0' + hour;
-    if (minutes.length < 2) minutes = '0' + minutes;
-
-    return `${year}-${month}-${day}T${hour}:${minutes}`;
-  };
-
   return (
     <input
       type="datetime-local"
       {...field}
       {...rest}
       value={formatDateTime(field.value)}
+      role="datetime"
     />
   );
 };

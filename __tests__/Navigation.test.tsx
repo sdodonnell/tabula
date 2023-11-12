@@ -1,11 +1,12 @@
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+
 import NavBar from '../components/Navigation/NavBar';
 import Sidebar from '../components/Navigation/Sidebar';
 import UserMenu from '../components/Navigation/UserMenu';
 
-const session = {
+export const session = {
   user: {
     name: "Sam O'Donnell",
     email: 'sam.d.odonnell@gmail.com',
@@ -13,29 +14,6 @@ const session = {
   },
   expires: 'never'
 };
-
-jest.mock('next-auth/react', () => {
-  const originalModule = jest.requireActual('next-auth/react');
-  return {
-    __esModule: true,
-    ...originalModule,
-    useSession: jest.fn(() => ({
-      data: session,
-      status: 'authenticated'
-    }))
-  };
-});
-
-jest.mock('next-auth/next', () => ({
-  __esModule: true,
-  default: jest.fn(),
-  getServerSession: jest.fn(
-    () =>
-      new Promise(resolve => {
-        resolve(session);
-      })
-  )
-}));
 
 describe('NavBar', () => {
   test('Renders app title', async () => {
@@ -55,7 +33,7 @@ describe('NavBar', () => {
 
 describe('Sidebar', () => {
   test('Shows correct links', async () => {
-    const jsx = await Sidebar({ currentUser: session.user });
+    const jsx = await Sidebar({ currentUser: { id: 1 } });
     render(jsx);
 
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
