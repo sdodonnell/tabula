@@ -1,6 +1,6 @@
 import { getUsers } from '@/lib/user';
 import { USER_ROLES, User, UserParam } from '@/types/user';
-import DataList from '@/components/DataList';
+import DataList from '@/components/DataDisplay/DataList';
 
 export default async function Students() {
   const users = await getUsers({ role: USER_ROLES.STUDENT });

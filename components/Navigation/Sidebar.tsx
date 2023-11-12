@@ -1,11 +1,12 @@
-import { getLoggedInUser } from '@/lib/user';
 import Link from 'next/link';
 
-export default async function Sidebar() {
-  const currentUser = await getLoggedInUser();
+import { User } from '@/types';
 
-  if (!currentUser) return null;
+interface Props {
+  currentUser: Partial<User>;
+}
 
+export default async function Sidebar({ currentUser }: Props) {
   return (
     <aside
       id="default-sidebar"

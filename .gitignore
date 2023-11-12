@@ -38,3 +38,6 @@ next-env.d.ts
 # prisma
 prisma/migrations/*
 !prisma/migrations/migration_lock.toml
+
+# things to work on later
+later

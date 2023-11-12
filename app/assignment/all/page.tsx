@@ -1,4 +1,4 @@
-import DataList from '@/components/DataList';
+import DataList from '@/components/DataDisplay/DataList';
 import { getAssignments } from '@/lib/assignment';
 import { Assignment } from '@/types';
 

@@ -1,57 +1,26 @@
 'use client';
 
-import { Field, FieldInputProps, Form, Formik, FormikProps } from 'formik';
-import dynamic from 'next/dynamic';
+import { createCourse, updateCourse } from '@/lib/course';
+import { CourseInputVariables } from '@/types';
+import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
-import { startTransition, useState } from 'react';
-
-import { createAssignment, updateAssignment } from '@/lib/assignment';
-import { formatDateTime } from '@/lib/utils';
-import { AssignmentInputVariables, EditorData } from '@/types';
-
-const Editor = dynamic(() => import('@/components/Document/Editor'), {
-  ssr: false
-});
+import { startTransition } from 'react';
 
 interface Props {
-  initialValues: AssignmentInputVariables;
+  initialValues: CourseInputVariables;
   route: string;
 }
 
-const DateInput = ({
-  field,
-  form,
-  ...rest
-}: {
-  field: FieldInputProps<string>;
-  form: FormikProps<any>;
-}) => {
-  return (
-    <input
-      type="datetime-local"
-      {...field}
-      {...rest}
-      value={formatDateTime(field.value)}
-      role="datetime"
-    />
-  );
-};
-
-export default function EditAssignmentForm({ initialValues, route }: Props) {
+const EditCourseForm = ({ initialValues, route }: Props) => {
   const router = useRouter();
-  const [editorValue, setValue] = useState<EditorData>();
 
-  const submitForm = async (values: AssignmentInputVariables) => {
-    if (editorValue) {
-      values.body = editorValue;
-    }
-
+  const submitForm = async (values: CourseInputVariables) => {
     startTransition(() => {
       try {
         if (initialValues?.id) {
-          updateAssignment({ id: initialValues.id, data: values });
+          updateCourse({ id: initialValues.id, data: values });
         } else {
-          createAssignment(values);
+          createCourse(values);
         }
         router.push(route);
       } catch (error) {
@@ -74,21 +43,20 @@ export default function EditAssignmentForm({ initialValues, route }: Props) {
             id="name"
             name="name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Midterm Exam"
+            placeholder="World History"
             required
           />
         </div>
         <div className="mb-6">
           <label
-            htmlFor="dueDate"
+            htmlFor="term"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Due Date
+            Term
           </label>
           <Field
-            id="dueDate"
-            name="dueDate"
-            component={DateInput}
+            id="term"
+            name="term"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Spring 2023"
             required
@@ -96,15 +64,18 @@ export default function EditAssignmentForm({ initialValues, route }: Props) {
         </div>
         <div className="mb-6">
           <label
-            htmlFor="assignment-body"
+            htmlFor="description"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Description
           </label>
-          <Editor
-            id="assignment-body"
-            setValue={setValue}
-            data={initialValues?.body}
+          <Field
+            id="description"
+            name="description"
+            rows={4}
+            as="textarea"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Description goes here..."
           />
         </div>
         <button
@@ -116,4 +87,6 @@ export default function EditAssignmentForm({ initialValues, route }: Props) {
       </Form>
     </Formik>
   );
-}
+};
+
+export default EditCourseForm;

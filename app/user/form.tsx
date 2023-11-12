@@ -1,25 +1,36 @@
 'use client';
 
-import { updateUser } from '@/lib/user';
+import { createUser, updateUser } from '@/lib/user';
 import { UserInputVariables } from '@/types';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { startTransition } from 'react';
 
 interface Props {
   initialValues: UserInputVariables;
+  route: string;
 }
 
-export default function EditUserForm({ initialValues }: Props) {
+export default function EditUserForm({ initialValues, route }: Props) {
   const router = useRouter();
 
+  const submitForm = async (values: UserInputVariables) => {
+    startTransition(() => {
+      try {
+        if (initialValues?.id) {
+          updateUser({ id: initialValues.id, data: values });
+        } else {
+          createUser(values);
+        }
+        router.push(route);
+      } catch (error) {
+        alert(error);
+      }
+    });
+  };
+
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={async values => {
-        await updateUser();
-        router.push('/students/all');
-      }}
-    >
+    <Formik initialValues={initialValues} onSubmit={submitForm}>
       <Form>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="mb-6">

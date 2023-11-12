@@ -1,8 +1,9 @@
-import { getAssignment } from '@/lib/assignment';
-import { URLParams } from '@/types';
 import dynamic from 'next/dynamic';
 
-const Document = dynamic(() => import('@/components/Document'), {
+import { getAssignment } from '@/lib/assignment';
+import { URLParams } from '@/types';
+
+const Document = dynamic(() => import('@/components/Document/Document'), {
   ssr: false
 });
 

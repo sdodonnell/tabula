@@ -68,4 +68,17 @@ export const getCourse = async (variables: {
   }
 };
 
-export const updateCourse = async () => {};
+export const updateCourse = async (variables: {
+  id: number;
+  data: CourseInputVariables;
+}): Promise<number | null> => {
+  try {
+    const assignment = await prisma.course.update({
+      where: { id: variables.id },
+      data: variables.data
+    });
+    return assignment.id;
+  } catch (error) {
+    throw new Error(`Could not create course: ${error}`);
+  }
+};

@@ -24,6 +24,7 @@ export enum USER_ROLES {
 }
 
 export type UserInputVariables = {
+  id?: number;
   firstName: string;
   lastName: string;
   gender: string;
@@ -36,5 +37,6 @@ export type UserSession = {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-  }
+  },
+  expires: string
 };

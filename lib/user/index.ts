@@ -105,4 +105,17 @@ export const deleteUser = async (variables: { id: number }, path: string) => {
   }
 };
 
-export const updateUser = async () => {};
+export const updateUser = async (variables: {
+  id: number;
+  data: UserInputVariables;
+}): Promise<number | null> => {
+  try {
+    const user = await prisma.user.update({
+      where: { id: variables.id },
+      data: variables.data
+    });
+    return user.id;
+  } catch (error) {
+    throw new Error(`Could not create course: ${error}`);
+  }
+};
