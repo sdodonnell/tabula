@@ -303,16 +303,23 @@
       "gender": "Bigender"
     }
   ],
-  "courses": [{
-    "name": "World History",
-    "term": "Spring 2024",
-    "description": "History of the world.",
-    "sections": {
-        "create": [{
+  "courses": [
+    {
+      "name": "World History",
+      "term": "Spring 2024",
+      "description": "History of the world.",
+      "sections": {
+        "create": [
+          {
+            "name": "World History A Block",
             "active": true
-        }, {
+          },
+          {
+            "name": "World History B Block",
             "active": true
-        }]
+          }
+        ]
+      }
     }
-  }]
+  ]
 }

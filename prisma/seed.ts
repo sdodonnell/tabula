@@ -21,6 +21,7 @@ interface Course {
   sections: {
     create: [
       {
+        name: string;
         active: boolean;
       }
     ];

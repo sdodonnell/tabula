@@ -1,7 +1,8 @@
 'use server';
 
-import { Assignment, AssignmentInputVariables } from '@/types';
 import { PrismaClient } from '@prisma/client';
+
+import { Assignment, AssignmentInputVariables } from '@/types';
 
 const prisma = new PrismaClient();
 
@@ -26,6 +27,21 @@ export const getAssignment = async (variables: {
   } catch (error) {
     console.log('Could not fetch assignment data: ', error);
     return null;
+  }
+};
+
+export const getAssignmentsForCourse = async (variables: {
+  id: number;
+}): Promise<Assignment[]> => {
+  try {
+    const section = await prisma.section.findFirst({
+      where: { id: variables.id },
+      include: { assignments: true }
+    });
+    return (section?.assignments as Assignment[]) || [];
+  } catch (error) {
+    console.log('Could not fetch course data: ', error);
+    return [];
   }
 };
 

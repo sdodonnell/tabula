@@ -15,6 +15,10 @@ const Editor = dynamic(() => import('@/components/Document/Editor'), {
 
 interface Props {
   initialValues: AssignmentInputVariables;
+  activeCourses: Array<{
+    id: number;
+    name: string;
+  }>;
   route: string;
 }
 
@@ -37,7 +41,11 @@ const DateInput = ({
   );
 };
 
-export default function EditAssignmentForm({ initialValues, route }: Props) {
+export default function EditAssignmentForm({
+  initialValues,
+  activeCourses,
+  route
+}: Props) {
   const router = useRouter();
   const [editorValue, setValue] = useState<EditorData>();
 
@@ -93,6 +101,32 @@ export default function EditAssignmentForm({ initialValues, route }: Props) {
             placeholder="Spring 2023"
             required
           />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="courseOptions"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Section
+          </label>
+          <Field
+            id="courseOptions"
+            name="courseSelect"
+            as="select"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          >
+            <option value="" selected={!initialValues.id} disabled hidden>
+              Select Section
+            </option>
+            {activeCourses.map(course => {
+              return (
+                <option key={`course_select_${course.id}`} value={course.id}>
+                  {course.name}
+                </option>
+              );
+            })}
+          </Field>
         </div>
         <div className="mb-6">
           <label

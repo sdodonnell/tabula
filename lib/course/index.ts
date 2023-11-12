@@ -1,7 +1,13 @@
 'use server';
 
-import { Course, CourseInputVariables, Section } from '@/types/course';
 import { PrismaClient } from '@prisma/client';
+
+import {
+  Course,
+  CourseInputVariables,
+  Section,
+  SectionInputVariables
+} from '@/types/course';
 
 const prisma = new PrismaClient();
 
@@ -58,6 +64,9 @@ export const getCourse = async (variables: {
     const course = await prisma.course.findUnique({
       where: {
         id: variables.id
+      },
+      include: {
+        sections: true
       }
     });
 
@@ -80,5 +89,30 @@ export const updateCourse = async (variables: {
     return assignment.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);
+  }
+};
+
+export const createSection = async (variables: {
+  courseId: number;
+  teacherId: number;
+  data: SectionInputVariables;
+}): Promise<number | null> => {
+  try {
+    const section = await prisma.section.create({
+      data: {
+        ...variables.data,
+        course: {
+          connect: { id: variables.courseId }
+        },
+        teacher: {
+          connect: { id: variables.teacherId }
+        }
+      }
+    });
+
+    return section.id;
+  } catch (error) {
+    console.log('Could not create section: ', error);
+    return null;
   }
 };

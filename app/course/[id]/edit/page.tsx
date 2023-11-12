@@ -9,7 +9,7 @@ interface Props {
 export default async function EditCourse({ params }: Props) {
   const { id } = params;
   const course = await getCourse({ id: parseInt(id) });
-
+  
   if (!course) return null;
 
   const initialValues: CourseInputVariables = {
@@ -23,6 +23,7 @@ export default async function EditCourse({ params }: Props) {
     <EditCourseForm
       initialValues={initialValues}
       route={`/course/${id}/edit`}
+      sections={course.sections}
     />
   );
 }

@@ -1,9 +1,14 @@
+import { getAssignmentsForCourse } from '@/lib/assignment';
+
 interface Props {
   courseId: number;
 }
 
-const Feed = ({ courseId }) => {
+const Feed = async ({ courseId }: Props) => {
   // Get recent updates for course
+  const assignments = await getAssignmentsForCourse({ id: courseId });
+
+  console.log(assignments);
 
   return (
     <a

@@ -1,4 +1,4 @@
-import Feed from '@/components/Feed';
+import Feed from '@/components/Feed/Feed';
 import { getCourse } from '@/lib/course';
 import { URLParams } from '@/types';
 

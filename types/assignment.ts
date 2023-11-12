@@ -18,4 +18,5 @@ export type AssignmentInputVariables = {
   body?: EditorData;
   filePath?: string | null;
   dueDate: string;
+  sectionId: number | null;
 };
