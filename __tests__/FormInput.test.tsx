@@ -25,7 +25,7 @@ const mockUserValues: UserInputVariables = {
 const mockAssignmentValues: AssignmentInputVariables = {
   id: 1,
   name: 'Test assignment',
-  dueDate: new Date().toISOString()
+  dueDate: new Date('11/5/2023').toISOString()
 };
 
 const mockCourseValues: CourseInputVariables = {
@@ -48,6 +48,13 @@ describe('Forms', () => {
 
     test('An edit user form renders with prepopulated input', () => {
       render(<EditUserForm initialValues={mockUserValues} route="/user/1" />);
+      expect(screen.getByLabelText('First Name')).toHaveValue('John');
+      expect(screen.getByLabelText('Last Name')).toHaveValue('Smith');
+      expect(screen.getByLabelText('Select Type')).toHaveValue('STUDENT');
+      expect(screen.getByLabelText('Select Pronoun')).toHaveValue('He/Him');
+      expect(screen.getByLabelText('Email')).toHaveValue(
+        'john.smith@example.com'
+      );
     });
   });
 
@@ -64,13 +71,21 @@ describe('Forms', () => {
       });
     });
 
-    test('An edit assignment form renders with prepopulated input', () => {
+    test('An edit assignment form renders with prepopulated input', async () => {
       render(
         <EditAssignmentForm
           initialValues={mockAssignmentValues}
           route="/assignment/1"
         />
       );
+      await waitFor(() => {
+        expect(screen.getByLabelText('Name')).toHaveValue('Test assignment');
+      });
+      await waitFor(() => {
+        expect(screen.getByLabelText('Due Date')).toHaveValue(
+          formatDateTime(new Date('11/5/2023').toISOString())
+        );
+      });
     });
   });
 
@@ -82,10 +97,17 @@ describe('Forms', () => {
       expect(screen.getByLabelText('Description')).toHaveValue('');
     });
 
-    test('An edit course form renders with prepopulated input', () => {
+    test('An edit course form renders with prepopulated input', async () => {
       render(
         <EditCourseForm initialValues={mockCourseValues} route="/course/1" />
       );
+      expect(screen.getByLabelText('Name')).toHaveValue('Test course');
+      expect(screen.getByLabelText('Term')).toHaveValue('Spring 2023');
+      await waitFor(() => {
+        expect(screen.getByLabelText('Description')).toHaveValue(
+          'Test description'
+        );
+      });
     });
   });
 });
