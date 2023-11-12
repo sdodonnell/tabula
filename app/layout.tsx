@@ -1,10 +1,11 @@
-import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
-import Sidebar from '@/components/Navigation/Sidebar';
+import Script from 'next/script';
+
 import NavBar from '@/components/Navigation/NavBar';
+import Sidebar from '@/components/Navigation/Sidebar';
 import { getLoggedInUser } from '@/lib/user';
+import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

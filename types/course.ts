@@ -6,7 +6,7 @@ export interface Course {
   term: string;
   description: string | null;
   syllabus: string | null;
-  sections: Section[];
+  sections?: Section[];
 }
 
 export interface Section {
