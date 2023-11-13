@@ -1,34 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tabula - A New Learning Management System
+
+Welcome to the GitHub repository of **Tabula**, an innovative Learning Management System (LMS) designed for teachers, students, and administrators. Tabula facilitates efficient classroom management by letting AI do the administrative tasks so teachers can spend more time teaching and students can spend more time learning.
+
+## Features
+
+- **For Teachers**: Manage courses, assignments, and grades.
+- **For Students**: Enroll in courses, submit assignments, and monitor progress.
+- **For Administrators**: Oversee user accounts, manage courses, and configure system settings.
+
+### Development Priorities
+
+- **Course Management:**
+  - Create, edit, and delete courses.
+  - Add and remove students from courses.
+  - Upload and organize course materials.
+- **Assignment Tracking:**
+  - Create and distribute assignments.
+  - Collect and grade student submissions.
+  - Provide feedback to students.
+- **Gradebook:**
+  - Easily input and manage grades for assignments.
+  - Generate comprehensive reports for administrators.
+- **User-friendly Interface:**
+  - Intuitive dashboard for quick access to essential features.
+  - Responsive design for seamless use on various devices.
+- **Security:**
+  - Secure user authentication and authorization.
+  - Data encryption for sensitive information.
+
+## Built With
+
+## Built With
+- [Next.JS](https://nextjs.org/) - The React framework for production.
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript.
+- [PostgreSQL](https://www.postgresql.org/) - The world's most advanced open-source relational database.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18)
+- pnpm
+
+### Installation
+
+> **_NOTE:_** These instructions assume you're using `pnpm`, but use your package manager of choice.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sdodonnell/Tabula.git
+   ```
+2. Install packages using pnpm:
+   ```bash
+   pnpm install
+   ```
+3. Set up your `.env` file with the required environment variables (actual variable provided by administrator):
+   ```env
+   DATABASE_URL="postgresql://username:password@localhost:5432/tabula"
+   ```
+4. (optional) Add the following line to your `hosts` file:
+    ```bash
+    127.0.0.1 dev.tabulalms.com:3000
+    ```
+
+### Running the Application
+
+To start the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+pnpm run dev:local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be accessible at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Running Tests
 
-## Learn More
+Tabula uses Jest and React Testing Library for unit testing.
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites for Testing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Jest (v26 or higher)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Running Unit Tests
 
-## Deploy on Vercel
+Execute the tests with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This command will run all tests and generate a coverage report.
+
+## Contact
+
+Sam O'Donnell - sam.d.odonnell@gmail.com
+
+Project Link: [https://github.com/sdodonnell/Tabula](https://github.com/sdodonnell/Tabula)
