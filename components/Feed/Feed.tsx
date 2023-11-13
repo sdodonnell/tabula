@@ -8,8 +8,6 @@ const Feed = async ({ courseId }: Props) => {
   // Get recent updates for course
   const assignments = await getAssignmentsForCourse({ id: courseId });
 
-  console.log(assignments);
-
   return (
     <a
       href="#"

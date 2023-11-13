@@ -14,12 +14,12 @@ const NewSection = async ({ params }: Props) => {
 
   const initialValues = {
     active: true,
-    name: ''
+    name: '',
+    courseId: id
   };
 
   return (
     <EditSectionForm
-      courseId={id}
       teachers={teachers}
       route={`/course/${id}/edit`}
       initialValues={initialValues}

@@ -20,6 +20,7 @@ export interface SectionInputVariables {
   id?: number;
   active: boolean;
   name: string;
+  courseId: number;
   teacherId?: number;
 }
 
@@ -29,5 +30,4 @@ export interface CourseInputVariables {
   term: string;
   description?: string;
   syllabus?: string;
-  sections?: SectionInputVariables[];
 }

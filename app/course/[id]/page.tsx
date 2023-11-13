@@ -17,7 +17,7 @@ export default async function Course({ params }: Props) {
       <p>Name: {course?.name}</p>
       <p> Term: {course?.term}</p>
       <p> Description: {course?.description}</p>
-      <Feed courseId={id} />
+      <Feed courseId={parseInt(id)} />
     </>
   );
 }

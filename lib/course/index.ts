@@ -93,20 +93,12 @@ export const updateCourse = async (variables: {
 };
 
 export const createSection = async (variables: {
-  courseId: number;
-  teacherId: number;
   data: SectionInputVariables;
 }): Promise<number | null> => {
   try {
     const section = await prisma.section.create({
       data: {
-        ...variables.data,
-        course: {
-          connect: { id: variables.courseId }
-        },
-        teacher: {
-          connect: { id: variables.teacherId }
-        }
+        ...variables.data
       }
     });
 

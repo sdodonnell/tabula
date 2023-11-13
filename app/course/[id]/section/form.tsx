@@ -8,14 +8,12 @@ import { createSection } from '@/lib/course';
 import { SectionInputVariables, Teacher } from '@/types';
 
 interface Props {
-  courseId: number;
   initialValues: SectionInputVariables;
   teachers: Teacher[];
   route: string;
 }
 
 export default function EditSectionForm({
-  courseId,
   initialValues,
   teachers,
   route
@@ -23,17 +21,19 @@ export default function EditSectionForm({
   const router = useRouter();
   //   const [editorValue, setValue] = useState<EditorData>();
 
-  const submitForm = async (values: SectionInputVariables & { teacherId: number }) => {
+  const submitForm = async (values: SectionInputVariables) => {
     // if (editorValue) {
     //   values.body = editorValue;
     // }
+
+    if (!values.teacherId) return;
 
     startTransition(() => {
       try {
         // if (initialValues?.id) {
         // updateAssignment({ id: initialValues.id, data: values });
         // } else {
-        createSection({ courseId, teacherId: values.teacherId, data: values });
+        createSection({ data: values });
         // }
         router.push(route);
       } catch (error) {
@@ -74,7 +74,12 @@ export default function EditSectionForm({
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           >
-            <option value="" selected={!initialValues.teacherId} disabled hidden>
+            <option
+              value=""
+              selected={!initialValues.teacherId}
+              disabled
+              hidden
+            >
               Select Teacher
             </option>
             {teachers.map(teacher => {
