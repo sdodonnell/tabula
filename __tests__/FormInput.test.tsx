@@ -25,7 +25,8 @@ const mockUserValues: UserInputVariables = {
 const mockAssignmentValues: AssignmentInputVariables = {
   id: 1,
   name: 'Test assignment',
-  dueDate: new Date('11/5/2023').toISOString()
+  dueDate: new Date('11/5/2023').toISOString(),
+  sectionId: 1
 };
 
 const mockCourseValues: CourseInputVariables = {
@@ -60,7 +61,9 @@ describe('Forms', () => {
 
   describe('Assignment Form', () => {
     test('A new assignment form renders with blank input', async () => {
-      render(<NewAssignment />);
+      const jsx = await NewAssignment();
+      render(jsx);
+
       await waitFor(() => {
         expect(screen.getByLabelText('Name')).toHaveValue('');
       });
@@ -74,6 +77,7 @@ describe('Forms', () => {
     test('An edit assignment form renders with prepopulated input', async () => {
       render(
         <EditAssignmentForm
+          activeCourses={[]}
           initialValues={mockAssignmentValues}
           route="/assignment/1"
         />
