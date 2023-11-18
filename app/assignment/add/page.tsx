@@ -1,6 +1,6 @@
 import EditAssignmentForm from 'assignment/form';
 
-import { getCourses } from '@/lib/course';
+import { getSections } from '@/lib/course';
 import type { AssignmentInputVariables } from '@/types';
 
 export default async function NewAssignment() {
@@ -11,7 +11,7 @@ export default async function NewAssignment() {
   };
 
   // TODO: Narrow these courses down to the ones editable by the current user
-  const activeCourses = (await getCourses()).map(course => ({
+  const activeCourses = (await getSections()).map(course => ({
     name: course.name,
     id: course.id
   }));

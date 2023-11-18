@@ -1,9 +1,11 @@
 import { PrismaClient, PrismaPromise, Role } from '@prisma/client';
+
 import data from './seed-data.json';
 
 interface MockData {
   users: User[];
   courses: Course[];
+  assignments: Assignment[];
 }
 
 interface User {
@@ -26,6 +28,15 @@ interface Course {
       }
     ];
   };
+}
+
+interface Assignment {
+  name: string;
+  body: object;
+  dueDate: string;
+  createdDate: string;
+  sectionId: number;
+  userId: number;
 }
 
 const prisma = new PrismaClient();
@@ -53,11 +64,12 @@ async function main() {
   try {
     await prisma.$transaction(transactions);
 
-    const { users, courses } = data as MockData;
+    const { users, courses, assignments } = data as MockData;
 
     await Promise.all([
       prisma.user.createMany({ data: users }),
-      prisma.course.create({ data: courses[0] })
+      prisma.course.create({ data: courses[0] }),
+      prisma.assignment.createMany({ data: assignments })
     ]);
   } catch (error) {
     console.log({ error });

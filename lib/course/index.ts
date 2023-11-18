@@ -21,6 +21,17 @@ export const getCourses = async (): Promise<Course[]> => {
   }
 };
 
+export const getSections = async () => {
+  try {
+    const sections = await prisma.section.findMany();
+
+    return sections;
+  } catch (error) {
+    console.log('Could not fetch sections: ', error);
+    return [];
+  }
+};
+
 export const getSectionsForTeacher = async (variables: {
   id: number;
 }): Promise<Section[]> => {
