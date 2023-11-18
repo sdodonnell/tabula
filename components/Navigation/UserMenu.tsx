@@ -3,12 +3,16 @@
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
+import { useClickToggle } from '@/lib/hooks';
+
 const UserMenu = () => {
   const { data: session } = useSession();
 
   if (!session) return null;
 
   const { user } = session;
+
+  const { ref, clickHandler } = useClickToggle();
 
   return (
     <>
@@ -18,7 +22,7 @@ const UserMenu = () => {
         id="user-menu-button"
         name="user-menu-button"
         aria-expanded="false"
-        data-dropdown-toggle="user-menu-dropdown"
+        onClick={clickHandler}
       >
         <span className="sr-only">Open user menu</span>
         {user?.image && (
@@ -32,8 +36,9 @@ const UserMenu = () => {
         )}
       </button>
       <div
-        className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+        className="hidden z-50 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-[60px] right-[20px]"
         id="user-menu-dropdown"
+        ref={ref}
         data-testid="user-menu-dropdown"
       >
         <div className="py-3 px-4">

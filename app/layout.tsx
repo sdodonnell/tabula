@@ -30,7 +30,6 @@ export default async function RootLayout({
           {currentUser && <Sidebar currentUser={currentUser} />}
           <main className="p-4 md:ml-64 h-auto pt-20">{children}</main>
         </div>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js" />
       </body>
     </html>
   );

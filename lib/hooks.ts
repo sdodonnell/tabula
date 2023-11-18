@@ -1,21 +1,25 @@
 // @ts-nocheck
-
-import { useEffect, useRef } from 'react';
-import Header from '@editorjs/header';
 import Checklist from '@editorjs/checklist';
-import SimpleImage from '@editorjs/simple-image';
-
 import EditorJS from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import SimpleImage from '@editorjs/simple-image';
+import { SyntheticEvent, useEffect, useRef } from 'react';
+
 import { EditorData } from '@/types';
 
 interface Props {
-  id: string,
-  setValue?: Function | null,
-  readOnly?: boolean
-  data?: EditorData | null
+  id: string;
+  setValue?: Function | null;
+  readOnly?: boolean;
+  data?: EditorData | null;
 }
 
-export const useEditor = ({ id, setValue, readOnly = false, data = null }: Props) => {
+export const useEditor = ({
+  id,
+  setValue,
+  readOnly = false,
+  data = null
+}: Props) => {
   const editor = useRef(null);
 
   useEffect(() => {
@@ -46,4 +50,17 @@ export const useEditor = ({ id, setValue, readOnly = false, data = null }: Props
   }, [id, setValue]);
 
   return editor;
+};
+
+export const useClickToggle = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (ref.current) {
+      ref.current.classList.toggle('hidden');
+    }
+  };
+
+  return { ref, clickHandler };
 };
