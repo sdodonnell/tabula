@@ -2,17 +2,22 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-
-import { useClickToggle } from '@/lib/hooks';
+import { SyntheticEvent, useState } from 'react';
 
 const UserMenu = () => {
+  // TODO: Consolidate into custom hook once you figure out why
+  // importing the custom hook breaks SSR
   const { data: session } = useSession();
+  const [isVisible, setIsVisible] = useState(false);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsVisible(prev => !prev);
+  };
 
   if (!session) return null;
 
   const { user } = session;
-
-  const { ref, clickHandler } = useClickToggle();
 
   return (
     <>
@@ -36,9 +41,10 @@ const UserMenu = () => {
         )}
       </button>
       <div
-        className="hidden z-50 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-[60px] right-[20px]"
+        className={`${
+          !isVisible && 'hidden'
+        } z-50 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-[60px] right-[20px]`}
         id="user-menu-dropdown"
-        ref={ref}
         data-testid="user-menu-dropdown"
       >
         <div className="py-3 px-4">

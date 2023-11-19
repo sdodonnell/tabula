@@ -1,7 +1,18 @@
-import { useClickToggle } from '@/lib/hooks';
+'use client';
+
+import { SyntheticEvent, useState } from "react";
+
 
 const AppDropdown = () => {
-  const { ref, clickHandler } = useClickToggle();
+  // TODO: Consolidate into custom hook once you figure out why
+  // importing the custom hook breaks SSR
+  const [isVisible, setIsVisible] = useState(false);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsVisible(prev => !prev);
+  };
+
   return (
     <>
       <button
@@ -20,9 +31,10 @@ const AppDropdown = () => {
         </svg>
       </button>
       <div
-        className="hidden overflow-hidden absolute z-50 top-[60px] right-[100px] max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+        className={`${
+          !isVisible && 'hidden'
+        } overflow-hidden absolute z-50 top-[60px] right-[100px] max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl`}
         id="apps-dropdown"
-        ref={ref}
       >
         <div className="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
           Apps

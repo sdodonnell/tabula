@@ -1,8 +1,8 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import { SyntheticEvent, useState } from 'react';
 
-import { useClickToggle } from '@/lib/hooks';
 import { UserSession } from '@/types';
 
 import AppDropdown from './AppDropdown';
@@ -14,15 +14,21 @@ interface Props {
 }
 
 const NavBarMenu = ({ session }: Props) => {
-  const { ref: addDropdownRef, clickHandler: handleAddClick } =
-    useClickToggle();
+  // TODO: Consolidate into custom hook once you figure out why
+  // importing the custom hook breaks SSR
+  const [isVisible, setIsVisible] = useState(false);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsVisible(prev => !prev);
+  };
 
   return (
     <SessionProvider session={session}>
       <div className="flex items-center lg:order-2">
         <button
           id="dropdownDefaultButton"
-          onClick={handleAddClick}
+          onClick={clickHandler}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button"
         >
@@ -46,8 +52,9 @@ const NavBarMenu = ({ session }: Props) => {
 
         <div
           id="add-dropdown"
-          ref={addDropdownRef}
-          className="absolute top-[60px] right-[100px] z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          className={`${
+            !isVisible && 'hidden'
+          } absolute top-[60px] right-[100px] z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
         >
           <ul
             className="py-2 text-sm text-gray-700 dark:text-gray-200"

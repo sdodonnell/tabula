@@ -14,7 +14,7 @@ const Editor = ({
   setValue: Function;
   data?: EditorData;
 }) => {
-  const editor = useEditor({ id, setValue, data });
+  // const editor = useEditor({ id, setValue, data });
 
   return (
     <Field

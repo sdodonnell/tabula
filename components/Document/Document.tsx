@@ -7,11 +7,11 @@ import { EditorData } from '@/types';
 
 const Document = ({ body }: { body: EditorData | null }) => {
   const id = useId();
-  const editor = useEditor({
-    id,
-    readOnly: true,
-    data: body
-  });
+  // const editor = useEditor({
+  //   id,
+  //   readOnly: true,
+  //   data: body
+  // });
 
   return <div id={id} />;
 };

@@ -1,9 +1,17 @@
-import React from 'react';
+'use client';
 
-import { useClickToggle } from '@/lib/hooks';
+import { SyntheticEvent, useState } from 'react';
 
 const Notifications = () => {
-  const { ref, clickHandler } = useClickToggle();
+  // TODO: Consolidate into custom hook once you figure out why
+  // importing the custom hook breaks SSR
+  const [isVisible, setIsVisible] = useState(false);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsVisible(prev => !prev);
+  };
+
   return (
     <>
       <button
@@ -23,9 +31,10 @@ const Notifications = () => {
         </svg>
       </button>
       <div
-        className="hidden overflow-hidden absolute z-50 top-[60px] max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
+        className={`${
+          !isVisible && 'hidden'
+        } overflow-hidden absolute z-50 top-[60px] max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl`}
         id="notification-dropdown"
-        ref={ref}
       >
         <div className="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
           Notifications
