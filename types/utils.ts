@@ -14,11 +14,15 @@ export type URLParams = {
 type EditorBlock = {
   id?: string;
   type: string;
-  data: object;
+  data: {
+    text?: string;
+    level?: number;
+    items: object[];
+  };
 };
 
 export type EditorData = {
   time: number;
-  blocks: EditorBlock[],
+  blocks: EditorBlock[];
   version: string;
-}
+};
