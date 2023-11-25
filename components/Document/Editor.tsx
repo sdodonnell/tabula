@@ -1,9 +1,20 @@
-import { useEditor } from '@/lib/hooks';
-import { EditorData } from '@/types';
+'use client';
+
 import { Field } from 'formik';
 
-const Editor = ({ id, setValue, data }: { id: string; setValue: Function, data?: EditorData }) => {
-  const editor = useEditor({ id, setValue, data });
+import { useEditor } from '@/lib/hooks';
+import { EditorData } from '@/types';
+
+const Editor = ({
+  id,
+  setValue,
+  data
+}: {
+  id: string;
+  setValue: Function;
+  data?: EditorData;
+}) => {
+  // const editor = useEditor({ id, setValue, data });
 
   return (
     <Field

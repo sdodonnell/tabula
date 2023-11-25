@@ -5,7 +5,7 @@ export type Node = {
 
 export type Nullable<T> = { [K in keyof T]: T[K] | null };
 
-export type EntityType = 'user' | 'course' | 'assignment';
+export type EntityType = 'user' | 'course' | 'assignment' | 'section';
 
 export type URLParams = {
   id: string;
@@ -14,11 +14,15 @@ export type URLParams = {
 type EditorBlock = {
   id?: string;
   type: string;
-  data: object;
+  data: {
+    text?: string;
+    level?: number;
+    items: object[];
+  };
 };
 
 export type EditorData = {
   time: number;
-  blocks: EditorBlock[],
+  blocks: EditorBlock[];
   version: string;
-}
+};

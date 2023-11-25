@@ -1,6 +1,7 @@
-import EditCourseForm from '../../form';
-import { CourseInputVariables, URLParams } from '@/types';
 import { getCourse } from '@/lib/course';
+import { CourseInputVariables, URLParams } from '@/types';
+
+import EditCourseForm from '../../form';
 
 interface Props {
   params: URLParams;
@@ -23,6 +24,7 @@ export default async function EditCourse({ params }: Props) {
     <EditCourseForm
       initialValues={initialValues}
       route={`/course/${id}/edit`}
+      sections={course.sections}
     />
   );
 }

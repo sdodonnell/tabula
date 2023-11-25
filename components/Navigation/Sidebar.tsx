@@ -1,12 +1,21 @@
 import Link from 'next/link';
 
+import { getSidebarItemsForUser } from '@/lib/user';
 import { User } from '@/types';
 
+import SidebarDropdown from './SidebarDropdown';
+
 interface Props {
-  currentUser: Partial<User>;
+  currentUser: Partial<User> & { id: number };
 }
 
 export default async function Sidebar({ currentUser }: Props) {
+  const { sectionsEnrolled, sectionsTaught } = await getSidebarItemsForUser({
+    id: currentUser.id
+  });
+
+  const sections = [...sectionsEnrolled, ...sectionsTaught];
+
   return (
     <aside
       id="default-sidebar"
@@ -32,51 +41,7 @@ export default async function Sidebar({ currentUser }: Props) {
             </Link>
           </li>
         </ul>
-        {/* <li>
-            <button
-              type="button"
-              className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-              aria-controls="academics-dropdown"
-              data-collapse-toggle="academics-dropdown"
-            >
-              <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                Academics
-              </span>
-              <svg
-                className="w-3 h-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button>
-            <ul id="academics-dropdown" className="hidden py-2 space-y-2">
-              <li>
-                <Link
-                  href={`/user/${currentUser.id}/students`}
-                  className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                >
-                  My Classes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/classes"
-                  className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                >
-                  All Classes
-                </Link>
-              </li>
-            </ul>
-          </li> */}
+
         <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
           <li>
             <Link
@@ -87,12 +52,9 @@ export default async function Sidebar({ currentUser }: Props) {
             </Link>
           </li>
           <li>
-            <Link
-              href={`/user/${currentUser.id}/courses`}
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-            >
-              <span className="flex-1 ml-3 whitespace-nowrap">My Courses</span>
-            </Link>
+            {sections.length > 0 && (
+              <SidebarDropdown sections={sections} userId={currentUser.id} />
+            )}
           </li>
         </ul>
         <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">

@@ -1,10 +1,11 @@
-import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
-import Sidebar from '@/components/Navigation/Sidebar';
+import Script from 'next/script';
+
 import NavBar from '@/components/Navigation/NavBar';
+import Sidebar from '@/components/Navigation/Sidebar';
 import { getLoggedInUser } from '@/lib/user';
+import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,7 +30,6 @@ export default async function RootLayout({
           {currentUser && <Sidebar currentUser={currentUser} />}
           <main className="p-4 md:ml-64 h-auto pt-20">{children}</main>
         </div>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js" />
       </body>
     </html>
   );

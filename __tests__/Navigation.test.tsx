@@ -39,10 +39,12 @@ describe('Sidebar', () => {
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
     expect(screen.getByText('My Students')).toBeInTheDocument();
-    expect(screen.getByText('My Courses')).toBeInTheDocument();
     expect(screen.getByText('All Students')).toBeInTheDocument();
     expect(screen.getByText('Faculty & Staff')).toBeInTheDocument();
   });
+
+  // TODO: Add test for a "My Courses link if a user is logged in and has courses"
+  // expect(screen.getByText('My Courses')).toBeInTheDocument();
 });
 
 describe('UserMenu', () => {

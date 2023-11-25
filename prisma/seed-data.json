@@ -1,6 +1,13 @@
 {
   "users": [
     {
+      "firstName": "Sam",
+      "lastName": "O'Donnell",
+      "email": "sam.d.odonnell@gmail.com",
+      "gender": "Male",
+      "role": "TEACHER"
+    },
+    {
       "firstName": "Kliment",
       "lastName": "Chillingsworth",
       "email": "kchillingsworth0@vimeo.com",
@@ -303,16 +310,115 @@
       "gender": "Bigender"
     }
   ],
-  "courses": [{
-    "name": "World History",
-    "term": "Spring 2024",
-    "description": "History of the world.",
-    "sections": {
-        "create": [{
-            "active": true
-        }, {
-            "active": true
-        }]
+  "courses": [
+    {
+      "name": "World History",
+      "term": "Spring 2024",
+      "description": "History of the world.",
+      "sections": {
+        "create": [
+          {
+            "name": "World History A Block",
+            "active": true,
+            "teacherId": 51
+          },
+          {
+            "name": "World History B Block",
+            "active": true,
+            "teacherId": 1
+          }
+        ]
+      }
     }
-  }]
+  ],
+  "assignments": [
+    {
+      "name": "Test on Unit 1",
+      "body": {
+        "time": 1700340389569,
+        "blocks": [
+          {
+            "id": "18KyL2NNxg",
+            "type": "header",
+            "data": {
+              "text": "Unit 1 Test",
+              "level": 2
+            }
+          },
+          {
+            "id": "d79BSvxFzS",
+            "type": "paragraph",
+            "data": {
+              "text": "Test on unit 1! Make sure to study."
+            }
+          },
+          {
+            "id": "8BT1RHfh1N",
+            "type": "checklist",
+            "data": {
+              "items": [
+                {
+                  "text": "Do the test.",
+                  "checked": false
+                },
+                {
+                  "text": "Do well!",
+                  "checked": false
+                }
+              ]
+            }
+          }
+        ],
+        "version": "2.28.2"
+      },
+      "dueDate": "2023-12-10T11:00:00.000Z",
+      "createdDate": "2023-12-08T11:00:00.000Z",
+      "sectionId": 1,
+      "userId": 1
+    },
+    {
+      "name": "Homework for Unit 1",
+      "body": {
+        "time": 1700340389569,
+        "blocks": [
+          {
+            "id": "18KyL2NNxg",
+            "type": "header",
+            "data": {
+              "text": "Unit 1 Homework",
+              "level": 2
+            }
+          },
+          {
+            "id": "d79BSvxFzS",
+            "type": "paragraph",
+            "data": {
+              "text": "Homework for unit 1."
+            }
+          },
+          {
+            "id": "8BT1RHfh1N",
+            "type": "checklist",
+            "data": {
+              "items": [
+                {
+                  "text": "Do the homework.",
+                  "checked": false
+                },
+                {
+                  "text": "Do well!",
+                  "checked": false
+                }
+              ]
+            }
+          }
+        ],
+        "version": "2.28.2"
+      },
+      "dueDate": "2023-12-10T11:00:00.000Z",
+      "createdDate": "2023-12-08T11:00:00.000Z",
+      "sectionId": 1,
+      "userId": 1
+    }
+  ]
 }

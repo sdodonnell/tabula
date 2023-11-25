@@ -2,9 +2,18 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { SyntheticEvent, useState } from 'react';
 
 const UserMenu = () => {
+  // TODO: Consolidate into custom hook once you figure out why
+  // importing the custom hook breaks SSR
   const { data: session } = useSession();
+  const [isVisible, setIsVisible] = useState(false);
+  const clickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setIsVisible(prev => !prev);
+  };
 
   if (!session) return null;
 
@@ -18,7 +27,7 @@ const UserMenu = () => {
         id="user-menu-button"
         name="user-menu-button"
         aria-expanded="false"
-        data-dropdown-toggle="user-menu-dropdown"
+        onClick={clickHandler}
       >
         <span className="sr-only">Open user menu</span>
         {user?.image && (
@@ -32,7 +41,9 @@ const UserMenu = () => {
         )}
       </button>
       <div
-        className="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+        className={`${
+          !isVisible && 'hidden'
+        } z-50 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute top-[60px] right-[20px]`}
         id="user-menu-dropdown"
         data-testid="user-menu-dropdown"
       >

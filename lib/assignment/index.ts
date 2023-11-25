@@ -1,7 +1,9 @@
 'use server';
 
-import { Assignment, AssignmentInputVariables } from '@/types';
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+
+import { Assignment, AssignmentInputVariables } from '@/types';
 
 const prisma = new PrismaClient();
 
@@ -26,6 +28,21 @@ export const getAssignment = async (variables: {
   } catch (error) {
     console.log('Could not fetch assignment data: ', error);
     return null;
+  }
+};
+
+export const getAssignmentsForSection = async (variables: {
+  id: number;
+}): Promise<Assignment[]> => {
+  try {
+    const section = await prisma.section.findFirst({
+      where: { id: variables.id },
+      include: { assignments: true }
+    });
+    return (section?.assignments as Assignment[]) || [];
+  } catch (error) {
+    console.log('Could not fetch course data: ', error);
+    return [];
   }
 };
 
@@ -65,8 +82,25 @@ export const updateAssignment = async (variables: {
       where: { id: variables.id },
       data: updateAssignmentVariables
     });
+
+    revalidatePath(`/assignment/${variables.id}`);
+
     return assignment.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);
+  }
+};
+
+export const deleteAssignment = async (
+  variables: { id: number },
+  path: string
+) => {
+  try {
+    await prisma.assignment.delete({ where: { id: variables.id } });
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log('Could not delete assignment: ', error);
+    return null;
   }
 };

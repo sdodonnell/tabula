@@ -1,6 +1,6 @@
-import { getSectionsForTeacher } from '@/lib/course';
 import DataList from '@/components/DataDisplay/DataList';
-import { Course } from '@/types';
+import { getSectionsForTeacher } from '@/lib/course';
+import { Section } from '@/types';
 
 interface Props {
   params: {
@@ -11,13 +11,15 @@ interface Props {
 export default async function Courses({ params }: Props) {
   const { id } = params;
   const sections = await getSectionsForTeacher({ id: parseInt(id) });
-  const courses = sections
-    .filter(section => !!section.active)
-    .map(section => section.course);
+  const courses = sections.filter(section => !!section.active);
 
-  const listParams: Array<keyof Course> = ['name', 'term', 'description'];
+  const listParams: Array<keyof Section> = ['name', 'active'];
 
   return (
-    <DataList<Course> data={courses} params={listParams} entityType="course" />
+    <DataList<Section>
+      data={courses}
+      params={listParams}
+      entityType="section"
+    />
   );
 }
