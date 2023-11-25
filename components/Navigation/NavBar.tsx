@@ -20,11 +20,11 @@ const NavBar = async () => {
             className="flex items-center justify-between mr-4"
           >
             <Image
-              src="https://flowbite.s3.amazonaws.com/logo.svg"
+              src="/tabula.svg"
               width="32"
               height="32"
               className="mr-3 h-8"
-              alt="Flowbite Logo"
+              alt="Tabula Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Tabula
