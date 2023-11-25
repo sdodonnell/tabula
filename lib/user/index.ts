@@ -115,6 +115,9 @@ export const updateUser = async (variables: {
       where: { id: variables.id },
       data: variables.data
     });
+
+    revalidatePath(`/user/${variables.id}`);
+
     return user.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);

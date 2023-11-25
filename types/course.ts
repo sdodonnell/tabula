@@ -13,7 +13,12 @@ export interface Section {
   id: number;
   name: string;
   active: boolean;
-  teacher?: User | null;
+  teacher?: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+  } | null;
   courseId?: number;
 }
 

@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { startTransition } from 'react';
 
-import { createSection } from '@/lib/course';
+import { createSection, updateSection } from '@/lib/course';
 import { SectionInputVariables, Teacher } from '@/types';
 
 interface Props {
@@ -30,11 +30,15 @@ export default function EditSectionForm({
 
     startTransition(() => {
       try {
-        // if (initialValues?.id) {
-        // updateAssignment({ id: initialValues.id, data: values });
-        // } else {
-        createSection({ data: values });
-        // }
+        if (initialValues?.id) {
+          updateSection({
+            id: initialValues.id,
+            courseId: initialValues.courseId,
+            data: values
+          });
+        } else {
+          createSection({ data: values });
+        }
         router.push(route);
       } catch (error) {
         alert(error);
@@ -69,11 +73,10 @@ export default function EditSectionForm({
           </label>
           <Field
             id="teacher-name"
-            name="teacher"
+            name="teacherId"
             as="select"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
-            defaultValue={initialValues.teacherId ?? ''}
           >
             <option value="" disabled hidden>
               Select Teacher

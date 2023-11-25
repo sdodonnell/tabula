@@ -1,6 +1,7 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
 import {
   Course,
@@ -93,13 +94,16 @@ export const updateCourse = async (variables: {
   data: CourseInputVariables;
 }): Promise<number | null> => {
   try {
-    const assignment = await prisma.course.update({
+    const course = await prisma.course.update({
       where: { id: variables.id },
       data: variables.data
     });
-    return assignment.id;
+
+    revalidatePath(`/course/${variables.id}`);
+
+    return course.id;
   } catch (error) {
-    throw new Error(`Could not create course: ${error}`);
+    throw new Error(`Could not update course: ${error}`);
   }
 };
 
@@ -120,6 +124,33 @@ export const createSection = async (variables: {
   }
 };
 
+export const updateSection = async (variables: {
+  id: number;
+  courseId: number;
+  data: SectionInputVariables;
+}): Promise<number | null> => {
+  const { id, courseId, data } = variables;
+
+  try {
+    const section = await prisma.section.update({
+      where: { id },
+      data: {
+        name: data.name,
+        teacherId: data.teacherId,
+        active: data.active
+      }
+    });
+
+    if (id && courseId) {
+      revalidatePath(`/course/${courseId}/section/${id}`);
+    }
+
+    return section.id;
+  } catch (error) {
+    throw new Error(`Could not update section: ${error}`);
+  }
+};
+
 export const getSection = async (variables: {
   id: number;
 }): Promise<Section | null> => {
@@ -127,6 +158,16 @@ export const getSection = async (variables: {
     const section = await prisma.section.findUnique({
       where: {
         id: variables.id
+      },
+      include: {
+        teacher: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true
+          }
+        }
       }
     });
 

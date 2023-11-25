@@ -1,6 +1,7 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
 import { Assignment, AssignmentInputVariables } from '@/types';
 
@@ -81,6 +82,9 @@ export const updateAssignment = async (variables: {
       where: { id: variables.id },
       data: updateAssignmentVariables
     });
+
+    revalidatePath(`/assignment/${variables.id}`);
+
     return assignment.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);
