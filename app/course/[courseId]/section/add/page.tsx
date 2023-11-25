@@ -15,7 +15,8 @@ const NewSection = async ({ params }: Props) => {
   const initialValues = {
     active: true,
     name: '',
-    courseId: id
+    courseId: id,
+    teacherId: 0
   };
 
   return (

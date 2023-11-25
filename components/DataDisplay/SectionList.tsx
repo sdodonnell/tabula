@@ -14,8 +14,6 @@ const SectionList = ({ sections }: { sections: Section[] }) => {
           ? `${section.teacher.firstName} ${section.teacher.lastName}`
           : '';
 
-        const sectionName = section.name;
-
         return (
           <li className="pb-3 sm:pb-4" key={section.id}>
             <div className="flex items-center space-x-4 rtl:space-x-reverse">

@@ -127,8 +127,8 @@ export const updateUser = async (variables: {
 export const getSidebarItemsForUser = async (variables: {
   id: number;
 }): Promise<{
-  sectionsTaught: Section[];
-  sectionsEnrolled: Section[];
+  sectionsTaught: Omit<Section, 'teacher'>[];
+  sectionsEnrolled: Omit<Section, 'teacher'>[];
 }> => {
   try {
     const data = await prisma.user.findUnique({

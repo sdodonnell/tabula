@@ -15,11 +15,14 @@ const EditSection = async ({ params }: Props) => {
   const teachers = await getUsers({ role: 'TEACHER' });
   const section = await getSection({ id: parseInt(sectionId) });
 
+  if (!section) {
+    return <p>Error!</p>
+  }
+
   const initialValues = {
-    active: true,
-    name: '',
+    ...section,
+    teacherId: section.teacher.id,
     courseId: parseInt(courseId),
-    ...section
   };
 
   return (

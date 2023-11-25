@@ -21,7 +21,9 @@ export default function EditSectionForm({
   const router = useRouter();
   //   const [editorValue, setValue] = useState<EditorData>();
 
-  const submitForm = async (values: SectionInputVariables) => {
+  const submitForm = async (
+    values: SectionInputVariables & { teacherId: string | number }
+  ) => {
     // if (editorValue) {
     //   values.body = editorValue;
     // }
@@ -34,7 +36,10 @@ export default function EditSectionForm({
           updateSection({
             id: initialValues.id,
             courseId: initialValues.courseId,
-            data: values
+            data: {
+              ...values,
+              teacherId: Number(values.teacherId)
+            }
           });
         } else {
           createSection({ data: values });
@@ -78,7 +83,7 @@ export default function EditSectionForm({
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               Select Teacher
             </option>
             {teachers.map(teacher => {

@@ -25,6 +25,7 @@ interface Course {
       {
         name: string;
         active: boolean;
+        teacherId: number;
       }
     ];
   };

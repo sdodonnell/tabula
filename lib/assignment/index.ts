@@ -90,3 +90,17 @@ export const updateAssignment = async (variables: {
     throw new Error(`Could not create course: ${error}`);
   }
 };
+
+export const deleteAssignment = async (
+  variables: { id: number },
+  path: string
+) => {
+  try {
+    await prisma.assignment.delete({ where: { id: variables.id } });
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log('Could not delete assignment: ', error);
+    return null;
+  }
+};

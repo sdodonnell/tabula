@@ -16,7 +16,7 @@ const NavBar = async () => {
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex justify-start items-center">
           <Link
-            href="/dashboard"
+            href="/"
             className="flex items-center justify-between mr-4"
           >
             <Image

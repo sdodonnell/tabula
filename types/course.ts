@@ -13,12 +13,12 @@ export interface Section {
   id: number;
   name: string;
   active: boolean;
-  teacher?: {
+  teacher: {
     id: number;
     firstName: string;
     lastName: string;
     email: string;
-  } | null;
+  };
   courseId?: number;
 }
 
@@ -27,7 +27,7 @@ export interface SectionInputVariables {
   active: boolean;
   name: string;
   courseId: number;
-  teacherId?: number;
+  teacherId: number;
 }
 
 export interface CourseInputVariables {

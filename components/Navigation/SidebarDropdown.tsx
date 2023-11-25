@@ -6,7 +6,7 @@ import { SyntheticEvent, useState } from 'react';
 import { Section } from '@/types';
 
 interface Props {
-  sections: Section[];
+  sections: Omit<Section, 'teacher'>[];
   userId?: number;
 }
 

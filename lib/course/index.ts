@@ -78,7 +78,11 @@ export const getCourse = async (variables: {
         id: variables.id
       },
       include: {
-        sections: true
+        sections: {
+          include: {
+            teacher: true
+          }
+        }
       }
     });
 
@@ -104,6 +108,23 @@ export const updateCourse = async (variables: {
     return course.id;
   } catch (error) {
     throw new Error(`Could not update course: ${error}`);
+  }
+};
+
+export const deleteCourse = async (variables: { id: number }, path: string) => {
+  try {
+    await prisma.section.deleteMany({
+      where: {
+        courseId: variables.id
+      }
+    });
+
+    await prisma.course.delete({ where: { id: variables.id } });
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log('Could not delete course: ', error);
+    return null;
   }
 };
 
@@ -174,6 +195,20 @@ export const getSection = async (variables: {
     return section;
   } catch (error) {
     console.log('Could not get section: ', error);
+    return null;
+  }
+};
+
+export const deleteSection = async (
+  variables: { id: number },
+  path: string
+) => {
+  try {
+    await prisma.section.delete({ where: { id: variables.id } });
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log('Could not delete section: ', error);
     return null;
   }
 };
