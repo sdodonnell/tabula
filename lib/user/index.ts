@@ -1,9 +1,10 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { User, UserInputVariables, Role, UserSession } from '@/types';
 import { revalidatePath } from 'next/cache';
+
 import { auth } from '@/lib/auth';
+import { Role, Section, User, UserInputVariables, UserSession } from '@/types';
 
 const prisma = new PrismaClient();
 
@@ -117,5 +118,35 @@ export const updateUser = async (variables: {
     return user.id;
   } catch (error) {
     throw new Error(`Could not create course: ${error}`);
+  }
+};
+
+export const getSidebarItemsForUser = async (variables: {
+  id: number;
+}): Promise<{
+  sectionsTaught: Section[];
+  sectionsEnrolled: Section[];
+}> => {
+  try {
+    const data = await prisma.user.findUnique({
+      where: { id: variables.id },
+      include: {
+        sectionsEnrolled: {
+          select: { section: true }
+        },
+        sectionsTaught: true
+      }
+    });
+
+    return {
+      sectionsEnrolled: data?.sectionsEnrolled.map(el => el.section) || [],
+      sectionsTaught: data?.sectionsTaught || []
+    };
+  } catch (error) {
+    console.log(`Could not fetch data for user ${variables.id}`, error);
+    return {
+      sectionsTaught: [],
+      sectionsEnrolled: []
+    };
   }
 };

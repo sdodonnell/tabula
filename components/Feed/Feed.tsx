@@ -1,15 +1,15 @@
 import Link from 'next/link';
 
-import { getAssignmentsForCourse } from '@/lib/assignment';
+import { getAssignmentsForSection } from '@/lib/assignment';
 import { Assignment } from '@/types';
 
 interface Props {
-  courseId: number;
+  sectionId: number;
 }
 
-const Feed = async ({ courseId }: Props) => {
+const Feed = async ({ sectionId }: Props) => {
   // Get recent updates for course
-  const assignments = await getAssignmentsForCourse({ id: courseId });
+  const assignments = await getAssignmentsForSection({ id: sectionId });
 
   return (
     <>

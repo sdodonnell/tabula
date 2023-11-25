@@ -119,3 +119,20 @@ export const createSection = async (variables: {
     return null;
   }
 };
+
+export const getSection = async (variables: {
+  id: number;
+}): Promise<Section | null> => {
+  try {
+    const section = await prisma.section.findUnique({
+      where: {
+        id: variables.id
+      }
+    });
+
+    return section;
+  } catch (error) {
+    console.log('Could not get section: ', error);
+    return null;
+  }
+};

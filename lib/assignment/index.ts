@@ -30,7 +30,7 @@ export const getAssignment = async (variables: {
   }
 };
 
-export const getAssignmentsForCourse = async (variables: {
+export const getAssignmentsForSection = async (variables: {
   id: number;
 }): Promise<Assignment[]> => {
   try {

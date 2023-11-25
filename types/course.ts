@@ -14,6 +14,7 @@ export interface Section {
   name: string;
   active: boolean;
   teacher?: User | null;
+  courseId?: number;
 }
 
 export interface SectionInputVariables {
