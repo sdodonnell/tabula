@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 
 import NavBar from '@/components/Navigation/NavBar';
 import Sidebar from '@/components/Navigation/Sidebar';
@@ -16,9 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-  children
+  children,
+  ai
 }: {
   children: React.ReactNode;
+  ai: React.ReactNode;
 }) {
   const currentUser = await getLoggedInUser();
 
@@ -26,7 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="antialiased bg-gray-50 dark:bg-gray-900">
-          <NavBar />
+          <NavBar>{ai}</NavBar>
           {currentUser && <Sidebar currentUser={currentUser} />}
           <main className="p-4 md:ml-64 h-auto pt-20">{children}</main>
         </div>
